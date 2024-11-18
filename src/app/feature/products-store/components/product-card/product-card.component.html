@@ -1,0 +1,39 @@
+<section (click)="navigateToProductDetails(product().id)" class="product rounded-xl h-100">
+  <div class="product-thumbnail d-flex justify-content-center w-100 rounded-xl">
+    <img class="" [ngSrc]="product().image" width="200" height="180"  loading="lazy">
+    <span class="product-rate-count rounded-xl">
+      <span class="rate"> {{ product().rating.rate }}</span>
+      <svg-icon [icon]="ICONS.star" [size]="1"></svg-icon>
+      <span class="count"> {{ "(" + product().rating.count + ")" }}</span>
+    </span>
+  </div>
+  <div class="product-details d-flex flex-column gap-1 p-2">
+    <strong class="product-title">{{ product().title }}</strong>
+    <small class="product-description">{{ product().description }}</small>
+    <div class="product-data d-flex justify-content-between">
+      <span class="product-caterogry">
+        <chip colorHex="#7a889c">{{ product().category }}</chip>
+      </span>
+      <strong class="product-price">
+        {{ product().price | currency : "USD" }}</strong
+      >
+    </div>
+  </div>
+  <div class="product-cart p-2">
+    @if (!product().quantity) {
+    <button class="btn bg-secondary color-white rounded-xl">
+      <small>{{ "cart.add" | translate }}</small>
+    </button>
+    } @else {
+    <div class="product-cart-action d-flex justify-content-between">
+      <button>
+        <svg-icon [icon]="ICONS.add" [size]="2"></svg-icon>
+      </button>
+      <input type="number" />
+      <button>
+        <svg-icon [icon]="ICONS.minus" [size]="2"></svg-icon>
+      </button>
+    </div>
+    }
+  </div>
+</section>

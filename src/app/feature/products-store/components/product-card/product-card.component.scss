@@ -1,0 +1,63 @@
+@use '../../../../../assets/style/colors' as colors;
+
+.product {
+    // border-radius: 20px !important;
+    border: 1px solid colors.$gray-100;
+    box-shadow: 3px 3px 3px colors.$gray-100;
+    background-color: colors.$white-color;
+    overflow: hidden;
+
+
+
+
+    &-thumbnail {
+        border: 1px solid colors.$gray-100;
+        position: relative;
+
+        .product-rate-count {
+            background-color: colors.$white-color;
+            padding: 3px 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+
+            .rate {
+                font-weight: 700;
+                color: colors.$gray-600;
+            }
+
+            .count {
+                color: colors.$gray-300;
+            }
+        }
+    }
+
+
+    &-details {
+        background-color: white;
+    }
+
+    &-title {
+        color: colors.$gray-700;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+
+    &-description {
+        color: colors.$gray-400;
+
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &-cart {
+        &-actions {}
+    }
+}
