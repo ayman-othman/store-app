@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, input, InputSignal } from "@angular/core";
-import { FadeColorPipe } from "@e-commerce-store/shared/pipes/fade-color/fade-color.pipe";
+import { FadeColorPipe } from "../../pipes/fade-color/fade-color.pipe";
 
 @Component({
 	selector: "chip",
