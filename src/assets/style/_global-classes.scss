@@ -253,6 +253,9 @@
     background-color: $secondary-800;
 }
 
+.bg-white {
+    background-color: $white-color;
+}
 
 .color-white {
     color: $white-color;
@@ -320,4 +323,44 @@
 
 .color-secondary-800 {
     color: $secondary-800;
+}
+
+.color-gray {
+    color: $gray-color;
+}
+
+.color-gray-100 {
+    color: $gray-100;
+}
+
+.color-gray-200 {
+    color: $gray-200;
+}
+
+.color-gray-300 {
+    color: $gray-300;
+}
+
+.color-gray-500 {
+    color: $gray-500;
+}
+
+.color-gray-600 {
+    color: $gray-600;
+}
+
+.color-gray-700 {
+    color: $gray-700;
+}
+
+.color-gray-800 {
+    color: $gray-800;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.shadow{
+    box-shadow:3px 3px 3px $gray-200;
 }
