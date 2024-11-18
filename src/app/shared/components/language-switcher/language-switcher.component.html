@@ -1,0 +1,31 @@
+<button mat-button [matMenuTriggerFor]="belowMenu">
+  <svg-icon [icon]="ICONS.language" [size]="2"></svg-icon>
+</button>
+<mat-menu #belowMenu="matMenu" yPosition="below">
+  <button mat-menu-item (click)="setCurrentLanguage('en')">
+    <a
+      class="cursor-pointer text-base transition-all flex items-center gap-2 text-black md:hover:text-textYellow md:p-0 md:hover:text-text-textYellow"
+      [ngClass]="{
+        'text-textYellow': translateService.currentLang === 'en',
+        'text-fontColor': translateService.currentLang === 'ar'
+      }"
+    >
+      <svg-icon [icon]="ICONS.AmericaFlag" [size]="1"></svg-icon>
+
+      {{ "languages.en" | translate }}</a
+    >
+  </button>
+  <button mat-menu-item (click)="setCurrentLanguage('ar')">
+    <a
+      class="cursor-pointer text-base transition-all flex items-center gap-2 text-black mover:text-textYellow hover:text-text-textYellow"
+      [ngClass]="{
+        'text-textYellow': translateService.currentLang === 'ar',
+        'text-fontColor': translateService.currentLang === 'en'
+      }"
+    >
+      <svg-icon [icon]="ICONS.egyptFlag" [size]="1"></svg-icon>
+
+      {{ "languages.ar" | translate }}</a
+    >
+  </button>
+</mat-menu>
