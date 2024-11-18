@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, InputSignal } from '@angular/core';
-import { Icons, ICONS } from '@e-commerce-store/core/models/icons/icon.const';
+import { ICONS, Icons } from '../../../core/models/icons/icon.const';
 
 @Component({
   selector: 'svg-icon',
