@@ -14,6 +14,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { APP_EFFECTS, APP_REDUCERS } from './store/app.store';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -24,8 +25,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideStore(),
-    provideEffects(),
+    provideStore(APP_REDUCERS),
+    provideEffects(APP_EFFECTS),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     importProvidersFrom([
       TranslateModule.forRoot({
