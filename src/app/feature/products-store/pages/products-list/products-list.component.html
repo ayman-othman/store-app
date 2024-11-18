@@ -1,0 +1,26 @@
+<section>
+  <div class="container">
+    <!-- Categories -->
+    <div></div>
+    <!-- Products List -->
+    <div class="row justify-content-center gap-2">
+      @for (product of ((productList$ | async )|
+      localPagination:paginationConfiguration); track $index) {
+      <product-card
+        class="col-xsmall-12 col-small-3 col-medium-2"
+        [product]="product"
+      ></product-card>
+      }
+      <div class="col-small-12 d-flex justify-content-center">
+        <!-- pagination -->
+        <pagination
+          [currentPage]="paginationConfiguration.pageNumber"
+          [totalItems]="(productList$ | async)?.length!"
+          [itemsPerPage]="paginationConfiguration.perPage"
+          (selectedPage)="onPaginationChange($event)"
+        ></pagination>
+      </div>
+    </div>
+
+  </div>
+</section>

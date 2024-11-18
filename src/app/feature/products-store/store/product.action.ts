@@ -6,9 +6,9 @@ import { IPagination } from '../models/interfaces/pagination.interface';
 export enum ProductsActionEnum {
   MAIN = 'products',
   // PRODUCTS
-  GET_LIST = 'GET_LIST',
-  GET_LIST_SUCCESS = 'GET_LIST_SUCCESS',
-  GET_LIST_FAIL = 'GET_LIST_FAIL',
+  GET_PRODUCT_LIST = 'GET_PRODUCT_LIST',
+  GET_PRODUCT_LIST_SUCCESS = 'GET_PRODUCT_LIST_SUCCESS',
+  GET_PRODUCT_LIST_FAIL = 'GET_PRODUCT_LIST_FAIL',
   // PRODUCT DETAILS
   GET_PRODUCT = 'GET_PRODUCT',
   GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS',
@@ -23,13 +23,13 @@ export const ProductsActions = createActionGroup({
   source: ProductsActionEnum.MAIN,
   events: {
     // GET LIST
-    [ProductsActionEnum.GET_LIST]: props<{
+    [ProductsActionEnum.GET_PRODUCT_LIST]: props<{
       payload: IPagination;
     }>(),
-    [ProductsActionEnum.GET_LIST_SUCCESS]: props<{
+    [ProductsActionEnum.GET_PRODUCT_LIST_SUCCESS]: props<{
       payload: Array<IProduct>;
     }>(),
-    [ProductsActionEnum.GET_LIST_FAIL]: props<{
+    [ProductsActionEnum.GET_PRODUCT_LIST_FAIL]: props<{
       error?: HttpErrorResponse;
     }>(),
 

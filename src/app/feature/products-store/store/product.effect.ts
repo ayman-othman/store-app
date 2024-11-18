@@ -15,16 +15,17 @@ export class ProductsEffects {
   // Get Products List
   getProductsList$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(ProductsActions.gET_LIST),
+      ofType(ProductsActions.gET_PRODUCT_LIST),
       switchMap((action) => {
         return this._productsService.getProducts(action.payload.perPage).pipe(
           switchMap((response) =>
-            of(ProductsActions.gET_LIST_SUCCESS({ payload: response }))
+            of(ProductsActions.gET_PRODUCT_LIST_SUCCESS({ payload: response }))
           ),
-          catchError((error) => of(ProductsActions.gET_LIST_FAIL({ error })))
+          catchError((error) =>
+            of(ProductsActions.gET_PRODUCT_LIST_FAIL({ error }))
+          )
         );
       })
     )
   );
-
 }

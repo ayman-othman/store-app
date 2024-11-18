@@ -5,21 +5,15 @@ import { ProductsActions } from './product.action';
 export const ProductsReducer = createReducer(
   INITIAL_PRODUCTS_STATE,
   // <---- PRODUCTS LIST ---->
-  on(ProductsActions.gET_LIST, (state) => {
-    return {
-      ...state,
-      list: [],
-      error: null,
-    };
-  }),
-  on(ProductsActions.gET_LIST_SUCCESS, (state, { payload }) => {
+
+  on(ProductsActions.gET_PRODUCT_LIST_SUCCESS, (state, { payload }) => {
     return {
       ...state,
       list: payload,
       error: null,
     };
   }),
-  on(ProductsActions.gET_LIST_FAIL, (state, { error }) => {
+  on(ProductsActions.gET_PRODUCT_LIST_FAIL, (state, { error }) => {
     return {
       ...state,
       list: [],
