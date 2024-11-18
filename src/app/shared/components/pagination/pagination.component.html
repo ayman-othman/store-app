@@ -1,0 +1,11 @@
+<section class="pagination">
+  @for (page of (totalItems() |pagePagination: itemsPerPage()); track $index) {
+  <button
+    class="page-number bg-gray-200"
+    (click)="onPageChange(page.value)"
+    [ngClass]="{ active: page.value === currentPage() }"
+  >
+    {{ page.label }}
+  </button>
+  }
+</section>

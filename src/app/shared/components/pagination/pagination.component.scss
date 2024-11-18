@@ -1,0 +1,17 @@
+@use '../../../../assets/style/colors' as *;
+
+.pagination {
+
+    .page-number {
+        padding: 5px;
+        margin: 0 5px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .active {
+        background-color: $primary-color;
+        font-weight: bolder;
+        color: $white-color;
+    }
+}
