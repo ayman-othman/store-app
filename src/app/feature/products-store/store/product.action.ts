@@ -39,10 +39,13 @@ export const ProductsActions = createActionGroup({
 
     //  PRODUCT Details
     [ProductsActionEnum.GET_PRODUCT]: props<{
-      payload: number;
+      payload: string;
     }>(),
     [ProductsActionEnum.GET_PRODUCT_SUCCESS]: props<{
-      payload: IProduct;
+      payload: {
+        productDetails:IProduct,
+        cachedProductDetails:Map<string, IProduct>
+      };
     }>(),
     [ProductsActionEnum.GET_PRODUCT_FAIL]: props<{
       error?: HttpErrorResponse;

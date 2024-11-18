@@ -17,7 +17,7 @@ export class ProductsService {
     );
   }
 
-  public getProductDetails(productId: number): Observable<IProduct> {
+  public getProductDetails(productId: string): Observable<IProduct> {
     return this._httpClient.get<IProduct>(
       environment.fakeStoreApi + `/products/${productId}`
     );

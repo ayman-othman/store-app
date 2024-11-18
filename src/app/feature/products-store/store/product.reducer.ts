@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { INITIAL_PRODUCTS_STATE } from './product.state';
 import { ProductsActions } from './product.action';
+import { IProduct } from '../models/interfaces/product.interface';
 
 export const ProductsReducer = createReducer(
   INITIAL_PRODUCTS_STATE,
@@ -48,6 +49,14 @@ export const ProductsReducer = createReducer(
     return {
       ...state,
       productDetails: null,
+      error: null,
+    };
+  }),
+  on(ProductsActions.gET_PRODUCT_SUCCESS, (state, { payload }) => {
+    return {
+      ...state,
+      productDetails: payload.productDetails,
+      cachedProductDetails: new Map(payload.cachedProductDetails),
       error: null,
     };
   }),

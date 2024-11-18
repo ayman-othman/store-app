@@ -1,0 +1,35 @@
+@use '/style/colors' as colors;
+
+.product {
+    border: 1px solid colors.$gray-100;
+    box-shadow: 3px 3px 3px colors.$gray-100;
+    background-color: colors.$white-color;
+    overflow: hidden;
+
+    &-thumbnail {
+        border: 1px solid colors.$gray-100;
+    }
+
+    &-details {
+        background-color: white;
+
+        .product-rate-count {
+            background-color: colors.$white-color;
+            display: flex;
+            border: 1px solid colors.$gray-200;
+            width: fit-content;
+            padding: 3px 5px;
+            top: 10px;
+            right: 10px;
+
+            .rate {
+                font-weight: 700;
+                color: colors.$gray-600;
+            }
+
+            .count {
+                color: colors.$gray-300;
+            }
+        }
+    }
+}

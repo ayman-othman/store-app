@@ -5,12 +5,18 @@ import { ProductsActions } from './product.action';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { of } from 'rxjs/internal/observable/of';
+import { withLatestFrom } from 'rxjs/internal/operators/withLatestFrom';
+import { map } from 'rxjs/internal/operators/map';
+import { Store } from '@ngrx/store';
+import { IAppState } from '@store-app/store/app.store';
+import { CashedProductDetailsSelector } from './product.selector';
 
 @Injectable()
 export class ProductsEffects {
   // Injects
   private _actions$: Actions = inject(Actions);
   private _productsService: ProductsService = inject(ProductsService);
+  private _store: Store<IAppState> = inject(Store);
 
   // Get Products List
   getProductsList$ = createEffect(() =>
@@ -46,6 +52,45 @@ export class ProductsEffects {
             of(ProductsActions.gET_PRODUCTS_BY_CATEGORY_FAIL({ error }))
           )
         );
+      })
+    )
+  );
+
+  getProductDetails$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(ProductsActions.gET_PRODUCT),
+      withLatestFrom(this._store.select(CashedProductDetailsSelector)),
+      switchMap(([action, cachedDetails]) => {
+        const cachedProduct = cachedDetails?.get(action.payload); // Check if product is cached
+        if (cachedProduct) {
+          // If cached, return success action with cached product without hitting the API
+          return of(
+            ProductsActions.gET_PRODUCT_SUCCESS({
+              payload: {
+                productDetails: cachedProduct,
+                cachedProductDetails: cachedDetails,
+              },
+            })
+          );
+        } else {
+          // If not cached, make API call
+          return this._productsService.getProductDetails(action.payload).pipe(
+            map((response) => {
+              // Cache the newly fetched product details
+              const cachedProductDetails = new Map(cachedDetails);
+              cachedProductDetails.set(action.payload, response); // Store in cache
+              return ProductsActions.gET_PRODUCT_SUCCESS({
+                payload: {
+                  productDetails: response,
+                  cachedProductDetails: cachedProductDetails,
+                },
+              });
+            }),
+            catchError((error) => {
+              return of(ProductsActions.gET_PRODUCT_FAIL({ error }));
+            })
+          );
+        }
       })
     )
   );

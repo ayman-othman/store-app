@@ -3,7 +3,7 @@ import { IProduct } from '../models/interfaces/product.interface';
 export interface IProductsState {
   list: Array<IProduct> | null;
   productDetails: IProduct | null;
-  cachedProductDetails: Map<number, IProduct>;
+  cachedProductDetails: Map<string, IProduct>;
   categories: Array<string>;
   error: any;
 }

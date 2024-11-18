@@ -1,0 +1,80 @@
+<section class="product-details">
+  <div class="container">
+    @if (loadShimmer()) {
+    <div class="product rounded-xl h-100 p-3 d-flex gap-2">
+      <div class="shimmer" style="width: 200px; height: 180px"></div>
+        <div class="w-100 d-flex flex-column gap-1 p-2">
+          <div class="shimmer" style="width: 60%; height: 20px"></div>
+
+          <div class="shimmer" style="width:  20%; height: 20px"></div>
+          <div class="shimmer" style="width: 80%; height: 50px"></div>
+
+  
+          <div class="product-data d-flex justify-content-between">
+            <div class="shimmer" style="width: 60%; height: 20px"></div>
+
+            <div class="shimmer" style="width:  60%; height: 20px"></div>
+          </div>
+          <div class="shimmer" style="width: 70%; height: 20px"></div>
+        </div>
+
+    </div>
+    }@else {
+    <ng-container *ngIf="productDetails() as product">
+      <div class="product rounded-xl h-100 p-3 d-flex gap-2">
+        <div
+          class="product-thumbnail d-flex justify-content-center w-100 rounded-xl"
+        >
+          <img
+            class=""
+            [ngSrc]="product?.image!"
+            width="200"
+            height="180"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <div class="product-details d-flex flex-column gap-1 p-2">
+            <strong class="product-title">{{ product?.title }}</strong>
+            <span class="product-rate-count rounded-xl">
+              <span class="rate"> {{ product?.rating?.rate }}</span>
+              <svg-icon [icon]="ICONS.star" [size]="1"></svg-icon>
+              <span class="count">
+                {{ "(" + product?.rating?.count + ")" }}</span
+              >
+            </span>
+            <small class="product-description">{{
+              product?.description
+            }}</small>
+            <div class="product-data d-flex justify-content-between">
+              <span class="product-caterogry">
+                <chip colorHex="#7a889c">{{ product?.category }}</chip>
+              </span>
+              <strong class="product-price">
+                {{ product?.price | currency : "USD" }}</strong
+              >
+            </div>
+          </div>
+          <div class="product-cart p-2">
+            @if (!product?.quantity) {
+            <button class="btn bg-secondary color-white rounded-xl">
+              <small>{{ "cart.add" | translate }}</small>
+            </button>
+            } @else {
+            <div class="product-cart-action d-flex justify-content-between">
+              <button>
+                <svg-icon [icon]="ICONS.add" [size]="2"></svg-icon>
+              </button>
+              <input type="number" />
+              <button>
+                <svg-icon [icon]="ICONS.minus" [size]="2"></svg-icon>
+              </button>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    }
+  </div>
+</section>
