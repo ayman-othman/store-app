@@ -1,0 +1,6 @@
+@use './variables' as variables;
+
+
+@function size($multiplier) {
+    @return variables.$spacer * $multiplier;
+}

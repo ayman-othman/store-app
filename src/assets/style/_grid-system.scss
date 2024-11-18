@@ -1,0 +1,20 @@
+@use './mixins' as mixins;
+@use './media-query' as mq;
+
+//----------------------------------------------------
+@include mq.breakpoints(xsmall) {
+    @include mixins.grid-system(xsmall)
+  }
+
+@include mq.breakpoints(small) {
+    @include mixins.grid-system(small)
+}
+//----------------------------------------------------
+
+@include mq.breakpoints(medium) {
+    @include mixins.grid-system(medium)
+}
+//----------------------------------------------------
+@include mq.breakpoints(large) {
+    @include mixins.grid-system(large)
+}

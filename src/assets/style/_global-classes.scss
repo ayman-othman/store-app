@@ -1,0 +1,323 @@
+// Import the mixins file
+@use './mixins' as *;
+@use './media-query' as *;
+@use './variables' as *;
+@use './colors' as *;
+@include generate-margin-utilities();
+@include generate-padding-utilities();
+
+// Flex Display Classes
+.d-flex {
+    @include display-flex;
+}
+
+.justify-content-start {
+    @include justify-content(flex-start);
+}
+
+.justify-content-end {
+    @include justify-content(flex-end);
+}
+
+.justify-content-center {
+    @include justify-content(center);
+}
+
+.justify-content-between {
+    @include justify-content(space-between);
+}
+
+.justify-content-around {
+    @include justify-content(space-around);
+}
+
+// Align Content Classes
+.align-content-start {
+    @include align-content(flex-start);
+}
+
+.align-content-end {
+    @include align-content(flex-end);
+}
+
+.align-content-center {
+    @include align-content(center);
+}
+
+.align-content-space-between {
+    @include align-content(space-between);
+}
+
+.align-content-space-around {
+    @include align-content(space-around);
+}
+
+.align-content-stretch {
+    @include align-content(stretch);
+}
+
+// Align Items Classes
+.align-items-start {
+    @include align-items(flex-start);
+}
+
+.align-items-end {
+    @include align-items(flex-end);
+}
+
+.align-items-center {
+    @include align-items(center);
+}
+
+.align-items-stretch {
+    @include align-items(stretch);
+}
+
+.align-items-baseline {
+    @include align-items(baseline);
+}
+
+// Flex Direction Classes
+.flex-row {
+    @include flex-direction(row);
+}
+
+.flex-row-reverse {
+    @include flex-direction(row-reverse);
+}
+
+.flex-column {
+    @include flex-direction(column);
+}
+
+.flex-column-reverse {
+    @include flex-direction(column-reverse);
+}
+
+// Flex Wrap Classes
+.flex-nowrap {
+    @include flex-wrap(nowrap);
+}
+
+.flex-wrap {
+    @include flex-wrap(wrap);
+}
+
+.flex-wrap-reverse {
+    @include flex-wrap(wrap-reverse);
+}
+
+// WIDTH 
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.container {
+    @include breakpoints(xsmall) {
+        max-width: 750px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin: 0 auto;
+    }
+
+    //---------------------
+
+    @include breakpoints(small) {
+        width: 750px;
+    }
+
+    //---------------------
+    @include breakpoints(medium) {
+        width: 970px;
+    }
+
+    //---------------------
+
+    @include breakpoints(large) {
+        width: 1170px;
+    }
+
+
+
+}
+
+.rounded-sm {
+    border-radius: 0.125rem;
+}
+
+.rounded {
+    border-radius: 0.25rem;
+}
+
+.rounded-md {
+    border-radius: 0.375rem;
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.rounded-xl {
+    border-radius: 0.75rem;
+}
+
+.rounded-2xl {
+    border-radius: 1rem;
+}
+
+.rounded-3xl {
+    border-radius: 1.5rem;
+}
+
+
+@each $key, $value in $spacing-scale {
+    .gap-#{$key} {
+        @include gap($value);
+    }
+}
+
+.btn {
+    width: 100%;
+    padding: 5px;
+    background-color: white;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.251);
+    border: none;
+    text-align: center;
+}
+
+.bg-primary {
+    background-color: $primary-color;
+}
+
+.bg-primary-100 {
+    background-color: $primary-100;
+}
+
+.bg-primary-200 {
+    background-color: $primary-200;
+}
+
+.bg-primary-300 {
+    background-color: $primary-300;
+}
+
+.bg-primary-500 {
+    background-color: $primary-500;
+}
+
+.bg-primary-600 {
+    background-color: $primary-600;
+}
+
+.bg-primary-700 {
+    background-color: $primary-700;
+}
+
+.bg-primary-800 {
+    background-color: $primary-800;
+}
+
+.bg-secondary {
+    background-color: $secondary-color;
+}
+
+.bg-secondary-100 {
+    background-color: $secondary-100;
+}
+
+.bg-secondary-200 {
+    background-color: $secondary-200;
+}
+
+.bg-secondary-300 {
+    background-color: $secondary-300;
+}
+
+.bg-secondary-500 {
+    background-color: $secondary-500;
+}
+
+.bg-secondary-600 {
+    background-color: $secondary-600;
+}
+
+.bg-secondary-700 {
+    background-color: $secondary-700;
+}
+
+.bg-secondary-800 {
+    background-color: $secondary-800;
+}
+
+
+.color-white {
+    color: $white-color;
+}
+
+.color-primary {
+    color: $primary-color;
+}
+
+.color-primary-100 {
+    color: $primary-100;
+}
+
+.color-primary-200 {
+    color: $primary-200;
+}
+
+.color-primary-300 {
+    color: $primary-300;
+}
+
+.color-primary-500 {
+    color: $primary-500;
+}
+
+.color-primary-600 {
+    color: $primary-600;
+}
+
+.color-primary-700 {
+    color: $primary-700;
+}
+
+.color-primary-800 {
+    color: $primary-800;
+}
+
+.color-secondary {
+    color: $secondary-color;
+}
+
+.color-secondary-100 {
+    color: $secondary-100;
+}
+
+.color-secondary-200 {
+    color: $secondary-200;
+}
+
+.color-secondary-300 {
+    color: $secondary-300;
+}
+
+.color-secondary-500 {
+    color: $secondary-500;
+}
+
+.color-secondary-600 {
+    color: $secondary-600;
+}
+
+.color-secondary-700 {
+    color: $secondary-700;
+}
+
+.color-secondary-800 {
+    color: $secondary-800;
+}

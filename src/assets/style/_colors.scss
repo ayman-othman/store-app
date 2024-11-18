@@ -1,0 +1,54 @@
+//---------------------------------------------------
+$primary-color: #47007e;
+//---------------------------------------------------
+$primary-100: lighten($primary-color, 40%);
+$primary-200: lighten($primary-color, 30%);
+$primary-300: lighten($primary-color, 20%);
+$primary-400: lighten($primary-color, 10%);
+$primary-500: $primary-color;
+$primary-600: darken($primary-color, 10%);
+$primary-700: darken($primary-color, 20%);
+$primary-800: darken($primary-color, 30%);
+$primary-900: darken($primary-color, 40%);
+
+
+//---------------------------------------------------
+$secondary-color: #ff375e;
+//---------------------------------------------------
+$secondary-100: lighten($secondary-color, 40%);
+$secondary-200: lighten($secondary-color, 30%);
+$secondary-300: lighten($secondary-color, 20%);
+$secondary-400: lighten($secondary-color, 10%);
+$secondary-500: $secondary-color;
+$secondary-600: darken($secondary-color, 10%);
+$secondary-700: darken($secondary-color, 20%);
+$secondary-800: darken($secondary-color, 30%);
+$secondary-900: darken($secondary-color, 40%);
+
+//---------------------------------------------------
+$white-color: #ffffff;
+//---------------------------------------------------
+
+$dark-color: #1d252e;
+//---------------------------------------------------
+$dark-100: lighten($dark-color, 40%);
+$dark-200: lighten($dark-color, 30%);
+$dark-300: lighten($dark-color, 20%);
+$dark-400: lighten($dark-color, 10%);
+$dark-500: $dark-color;
+$dark-600: darken($dark-color, 10%);
+$dark-700: darken($dark-color, 20%);
+$dark-800: darken($dark-color, 30%);
+$dark-900: darken($dark-color, 40%);
+//---------------------------------------------------
+$gray-color: #667085;
+//---------------------------------------------------
+$gray-100: lighten($gray-color, 40%);
+$gray-200: lighten($gray-color, 30%);
+$gray-300: lighten($gray-color, 20%);
+$gray-400: lighten($gray-color, 10%);
+$gray-500: $gray-color;
+$gray-600: darken($gray-color, 10%);
+$gray-700: darken($gray-color, 20%);
+$gray-800: darken($gray-color, 30%);
+$gray-900: darken($gray-color, 40%);
