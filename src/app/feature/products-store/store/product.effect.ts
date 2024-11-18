@@ -28,4 +28,21 @@ export class ProductsEffects {
       })
     )
   );
+
+    // Get Categories List
+    getCategoriesList$ = createEffect(() =>
+      this._actions$.pipe(
+        ofType(ProductsActions.gET_CATEGORY_LIST),
+        switchMap((action) => {
+          return this._productsService.getCategories().pipe(
+            switchMap((response) =>
+              of(ProductsActions.gET_CATEGORY_LIST_SUCCESS({ payload: response }))
+            ),
+            catchError((error) =>
+              of(ProductsActions.gET_CATEGORY_LIST_FAIL({ error }))
+            )
+          );
+        })
+      )
+    );
 }

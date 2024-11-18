@@ -1,0 +1,13 @@
+@use '/style/colors' as colors;
+
+
+.category-card {
+    max-width: 20% !important;
+}
+
+.selectedCategory {
+    color: colors.$secondary-color;
+    border: 1px solid colors.$secondary-color ;
+    box-shadow: 3px 3px 0px colors.$secondary-color;
+    transition: all ease-in-out 0.3s;
+}

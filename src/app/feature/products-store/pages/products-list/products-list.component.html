@@ -1,16 +1,47 @@
 <section>
   <div class="container">
     <!-- Categories -->
-    <div></div>
+
+    <div class="categories-container d-flex justify-content-evenly gap-3 mx-3">
+      @for (category of (CategoriesList$ | async)!|categories; track $index) {
+      <ng-container
+        *ngTemplateOutlet="
+          categoryTemplate;
+          context: {
+            label: category.label,
+            value: category.value,
+          }
+        "
+      ></ng-container>
+      }
+    </div>
     <!-- Products List -->
     <div class="row justify-content-center gap-2">
+      @if(!productListShimmer()){
+      <!-- loop over products -->
       @for (product of ((productList$ | async )|
       localPagination:paginationConfiguration); track $index) {
       <product-card
         class="col-xsmall-12 col-small-3 col-medium-2"
         [product]="product"
       ></product-card>
+      } }@else{
+      <ng-container *ngFor="let item of [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]">
+        <div class="col-xsmall-12 col-small-3 col-medium-2 bg-white rounded-xl">
+          <div class="shimmer" style="width: 200px; height: 180px"></div>
+          <div class="product-details d-flex flex-column gap-1 p-2">
+            <div class="shimmer" style="width: 100%; height: 20px"></div>
+            <div class="shimmer" style="width: 100%; height: 40px"></div>
+            <div class="product-data d-flex justify-content-between">
+              <div class="shimmer" style="width: 40%; height: 20px"></div>
+              <div class="shimmer" style="width: 40%; height: 20px"></div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
       }
+
       <div class="col-small-12 d-flex justify-content-center">
         <!-- pagination -->
         <pagination
@@ -21,6 +52,21 @@
         ></pagination>
       </div>
     </div>
-
   </div>
 </section>
+
+<ng-template
+  #categoryTemplate
+  let-icon="icon"
+  let-label="label"
+  let-value="value"
+>
+  <div
+    class="category-card rounded-xl shadow bg-white color-gray-300 p-2 d-flex justify-content-center align-items-center"
+    [ngClass]="selectedCategoryForm.value === value ? 'selectedCategory ' : ''"
+    (click)="onSelectCategory(value)"
+  >
+    <!-- <svg-icon [icon]="icon"></svg-icon> -->
+    <span>{{ label }}</span>
+  </div>
+</ng-template>

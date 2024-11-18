@@ -5,7 +5,6 @@ import { ProductsActions } from './product.action';
 export const ProductsReducer = createReducer(
   INITIAL_PRODUCTS_STATE,
   // <---- PRODUCTS LIST ---->
-
   on(ProductsActions.gET_PRODUCT_LIST_SUCCESS, (state, { payload }) => {
     return {
       ...state,
@@ -36,17 +35,11 @@ export const ProductsReducer = createReducer(
     };
   }),
   // <---- CATEGORIES LIST ---->
-  on(ProductsActions.gET_CATEGORY_LIST, (state) => {
-    return {
-      ...state,
-      categories: [],
-      error: null,
-    };
-  }),
+
   on(ProductsActions.gET_CATEGORY_LIST_SUCCESS, (state, { payload }) => {
     return {
       ...state,
-      categories: payload,
+      categories: ['all', ...payload],
       error: null,
     };
   }),
