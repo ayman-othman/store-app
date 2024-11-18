@@ -1,0 +1,13 @@
+
+@use '../assets/style/colors' as colors;
+
+.app-root {
+    min-height: 100vh;
+    overflow-x: hidden;
+    .router-outlet {
+        flex: 1 0 auto;
+        padding: 64px 0;
+        background-color: #f3f4f6;
+    }
+}
+
