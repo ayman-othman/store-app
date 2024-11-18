@@ -19,6 +19,7 @@ import {
   delay,
   distinctUntilChanged,
   filter,
+  finalize,
   map,
   of,
   shareReplay,
@@ -40,6 +41,7 @@ import { SvgIconComponent } from '../../../../shared/components/svg-icon/svg-ico
 import { FormBuilder } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CategoriesPipe } from './pipes/categories.pipe';
+import { IProduct } from '../../models/interfaces/product.interface';
 
 @Component({
   selector: 'products-list',
@@ -64,21 +66,7 @@ export class ProductsListComponent implements OnInit {
   private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private _fb: FormBuilder = inject(FormBuilder);
   // Observables
-  public productList$ = of(true).pipe(
-    tap(() => {
-      this.productListShimmer.set(true);
-    }),
-    delay(5000),
-    switchMap(() => this._store.select(ProductsListSelector)),
-    tap((t) => {
-      !t.length && this._dispatchProductList();
-    }),
-    filter((f) => !!f.length),
-    tap(() => {
-      this.productListShimmer.set(false);
-    }),
-    shareReplay(1)
-  );
+  public productList: WritableSignal<Array<IProduct> | null> = signal(null);
 
   public CategoriesList$ = this._store.select(CategoriesSelector).pipe(
     tap((t) => {
@@ -96,11 +84,16 @@ export class ProductsListComponent implements OnInit {
   public productListShimmer: WritableSignal<boolean> = signal(false);
 
   ngOnInit(): void {
+    this._dispatchProductList();
+    this._selectProductList();
+
     this._listenForPaginationQueryParamChanges();
     this._listenForCategoriesParamChanges();
   }
 
   public _dispatchProductList(): void {
+    this.productListShimmer.set(true);
+
     this._store.dispatch(
       ProductsActions.gET_PRODUCT_LIST({
         payload: {
@@ -109,6 +102,17 @@ export class ProductsListComponent implements OnInit {
         },
       })
     );
+  }
+
+  public _dispatchProductListByCategory(category: string): void {
+    this.productListShimmer.set(true);
+    if (!!category) {
+      this._store.dispatch(
+        ProductsActions.gET_PRODUCTS_BY_CATEGORY({
+          payload: category,
+        })
+      );
+    }
   }
 
   public _dispatchProductCategories(): void {
@@ -124,6 +128,24 @@ export class ProductsListComponent implements OnInit {
       queryParams: query,
       queryParamsHandling: 'merge',
     });
+  }
+
+  private _selectProductList(): void {
+    this._store
+      .select(ProductsListSelector)
+      .pipe(
+        filter((f) => !!f?.length),
+        tap(() => {
+          this.productList.set(null);
+          this.productListShimmer.set(false);
+        })
+      )
+      .subscribe({
+        next: (list) => {
+          this.productList.set(list);
+        },
+        complete: () => {},
+      });
   }
 
   private _listenForPaginationQueryParamChanges(): void {
@@ -155,14 +177,17 @@ export class ProductsListComponent implements OnInit {
       .pipe(
         takeUntilDestroyed(this._destroyRef),
         map((m) => m.get(PRODUCTS_QUERY_PARAM.category)),
+        filter((f) => !!f),
         distinctUntilChanged()
       )
       .subscribe({
         next: (res) => {
-          this.selectedCategoryForm.setValue(res);
+          this._dispatchProductListByCategory(res!);
         },
       });
   }
+
+  
   private _deleteQuery(queryName: ProductsQueryParam): void {
     this._router.navigate([], {
       relativeTo: this._activatedRoute,
@@ -175,6 +200,15 @@ export class ProductsListComponent implements OnInit {
   }
 
   public onSelectCategory(category: string) {
-    this._setQueryParam({ [PRODUCTS_QUERY_PARAM.category]: category });
+    if (!!category) {
+      this._setQueryParam({
+        [PRODUCTS_QUERY_PARAM.category]: category,
+      });
+    } else {
+      this._dispatchProductList();
+    }
+    this.selectedCategoryForm.setValue(category);
   }
+
+
 }

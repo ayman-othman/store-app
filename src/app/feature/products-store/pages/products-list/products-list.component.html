@@ -19,8 +19,8 @@
     <div class="row justify-content-center gap-2">
       @if(!productListShimmer()){
       <!-- loop over products -->
-      @for (product of ((productList$ | async )|
-      localPagination:paginationConfiguration); track $index) {
+      @for (product of (productList()| localPagination:paginationConfiguration);
+      track $index) {
       <product-card
         class="col-xsmall-12 col-small-3 col-medium-2"
         [product]="product"
@@ -39,14 +39,13 @@
           </div>
         </div>
       </ng-container>
-
       }
 
       <div class="col-small-12 d-flex justify-content-center">
         <!-- pagination -->
         <pagination
           [currentPage]="paginationConfiguration.pageNumber"
-          [totalItems]="(productList$ | async)?.length!"
+          [totalItems]="productList()?.length!"
           [itemsPerPage]="paginationConfiguration.perPage"
           (selectedPage)="onPaginationChange($event)"
         ></pagination>
@@ -63,7 +62,7 @@
 >
   <div
     class="category-card rounded-xl shadow bg-white color-gray-300 p-2 d-flex justify-content-center align-items-center"
-    [ngClass]="selectedCategoryForm.value === value ? 'selectedCategory ' : ''"
+    [ngClass]="selectedCategoryForm?.value === value ? 'selectedCategory ' : ''"
     (click)="onSelectCategory(value)"
   >
     <!-- <svg-icon [icon]="icon"></svg-icon> -->

@@ -1,7 +1,7 @@
 import { IProduct } from '../models/interfaces/product.interface';
 
 export interface IProductsState {
-  list: Array<IProduct>;
+  list: Array<IProduct> | null;
   productDetails: IProduct | null;
   cachedProductDetails: Map<number, IProduct>;
   categories: Array<string>;
@@ -9,7 +9,7 @@ export interface IProductsState {
 }
 
 export const INITIAL_PRODUCTS_STATE: IProductsState = {
-  list: [],
+  list: null,
   productDetails: null,
   cachedProductDetails: new Map(),
   categories: [],

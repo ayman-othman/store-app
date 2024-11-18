@@ -19,7 +19,7 @@ export class CategoriesPipe implements PipeTransform {
 
       return {
         label: this._translateService.instant(`categories.${processedValue}`),
-        value: processedValue == 'all' ? null : processedValue,
+        value: processedValue == 'all' ? null : category,
         icon: '',
       };
     });

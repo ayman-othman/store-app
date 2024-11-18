@@ -13,10 +13,14 @@ export enum ProductsActionEnum {
   GET_PRODUCT = 'GET_PRODUCT',
   GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS',
   GET_PRODUCT_FAIL = 'GET_PRODUCT_FAIL',
-  // CATEGORY
+  // CATEGORY LIST
   GET_CATEGORY_LIST = 'GET_CATEGORY_LIST',
   GET_CATEGORY_LIST_SUCCESS = 'GET_CATEGORY_LIST_SUCCESS',
   GET_CATEGORY_LIST_FAIL = 'GET_CATEGORY_LIST_FAIL',
+  // GET PRODUCTS BY CATEGORY
+  GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY',
+  GET_PRODUCTS_BY_CATEGORY_SUCCESS = 'GET_PRODUCTS_BY_CATEGORY_SUCCESS',
+  GET_PRODUCTS_BY_CATEGORY_FAIL = 'GET_PRODUCTS_BY_CATEGORY_FAIL',
 }
 
 export const ProductsActions = createActionGroup({
@@ -44,12 +48,23 @@ export const ProductsActions = createActionGroup({
       error?: HttpErrorResponse;
     }>(),
 
-    // CATEGORY
+    // CATEGORY LIST
     [ProductsActionEnum.GET_CATEGORY_LIST]: emptyProps(),
     [ProductsActionEnum.GET_CATEGORY_LIST_SUCCESS]: props<{
       payload: Array<string>;
     }>(),
     [ProductsActionEnum.GET_CATEGORY_LIST_FAIL]: props<{
+      error?: HttpErrorResponse;
+    }>(),
+
+    // GET PRODUCTS BY CATEGORY
+    [ProductsActionEnum.GET_PRODUCTS_BY_CATEGORY]: props<{
+      payload: string;
+    }>(),
+    [ProductsActionEnum.GET_PRODUCTS_BY_CATEGORY_SUCCESS]: props<{
+      payload: Array<IProduct>;
+    }>(),
+    [ProductsActionEnum.GET_PRODUCTS_BY_CATEGORY_FAIL]: props<{
       error?: HttpErrorResponse;
     }>(),
   },

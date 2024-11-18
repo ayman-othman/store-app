@@ -29,20 +29,41 @@ export class ProductsEffects {
     )
   );
 
-    // Get Categories List
-    getCategoriesList$ = createEffect(() =>
-      this._actions$.pipe(
-        ofType(ProductsActions.gET_CATEGORY_LIST),
-        switchMap((action) => {
-          return this._productsService.getCategories().pipe(
-            switchMap((response) =>
-              of(ProductsActions.gET_CATEGORY_LIST_SUCCESS({ payload: response }))
-            ),
-            catchError((error) =>
-              of(ProductsActions.gET_CATEGORY_LIST_FAIL({ error }))
+  // Get Products BY CATEGORY
+  getProductsByCategory$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(ProductsActions.gET_PRODUCTS_BY_CATEGORY),
+      switchMap((action) => {
+        return this._productsService.getProductsByCategory(action.payload).pipe(
+          switchMap((response) =>
+            of(
+              ProductsActions.gET_PRODUCTS_BY_CATEGORY_SUCCESS({
+                payload: response,
+              })
             )
-          );
-        })
-      )
-    );
+          ),
+          catchError((error) =>
+            of(ProductsActions.gET_PRODUCTS_BY_CATEGORY_FAIL({ error }))
+          )
+        );
+      })
+    )
+  );
+
+  // Get Categories List
+  getCategoriesList$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(ProductsActions.gET_CATEGORY_LIST),
+      switchMap((action) => {
+        return this._productsService.getCategories().pipe(
+          switchMap((response) =>
+            of(ProductsActions.gET_CATEGORY_LIST_SUCCESS({ payload: response }))
+          ),
+          catchError((error) =>
+            of(ProductsActions.gET_CATEGORY_LIST_FAIL({ error }))
+          )
+        );
+      })
+    )
+  );
 }

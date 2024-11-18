@@ -19,6 +19,30 @@ export const ProductsReducer = createReducer(
       error: error,
     };
   }),
+
+  // <---- PRODUCTS LIST BY CATEGORY ---->
+  on(ProductsActions.gET_PRODUCTS_BY_CATEGORY, (state) => {
+    return {
+      ...state,
+      list: null,
+      error: null,
+    };
+  }),
+  on(ProductsActions.gET_PRODUCTS_BY_CATEGORY_SUCCESS, (state, { payload }) => {
+    return {
+      ...state,
+      list: payload,
+      error: null,
+    };
+  }),
+  on(ProductsActions.gET_PRODUCT_LIST_FAIL, (state, { error }) => {
+    return {
+      ...state,
+      list: null,
+      error: error,
+    };
+  }),
+
   // <---- PRODUCT DETAILS ---->
   on(ProductsActions.gET_PRODUCT, (state) => {
     return {

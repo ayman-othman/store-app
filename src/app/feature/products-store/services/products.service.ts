@@ -29,7 +29,7 @@ export class ProductsService {
     );
   }
 
-  public getCategoryProducts(category: string): Observable<Array<IProduct>> {
+  public getProductsByCategory(category: string): Observable<Array<IProduct>> {
     return this._httpClient.get<Array<IProduct>>(
       environment.fakeStoreApi + `/products/category/${category}`
     );
