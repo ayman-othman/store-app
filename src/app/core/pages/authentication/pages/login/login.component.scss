@@ -1,0 +1,36 @@
+@use '../../../../../../assets/style/colors' as colors;
+
+.login {
+    gap: 1.5rem;
+
+    &-description {
+        gap: 1.5rem;
+
+        img {
+            // margin-bottom: size(2.4);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            color: colors.$gray-400;
+        }
+
+    }
+
+}
+
+.valid-form-button {
+    background-color: colors.$secondary-color;
+    color: colors.$white-color;
+    cursor: pointer;
+}
+
+.invalid-form-button {
+    background-color: colors.$secondary-300;
+    color: colors.$secondary-100;
+    cursor: not-allowed;
+
+}

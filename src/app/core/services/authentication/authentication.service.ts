@@ -1,17 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  ILoginRequest,
-  ILoginResponse,
-} from '@e-commerce-store/core/pages/authentication/pages/login/models/interfaces/login.interface';
-import { CookieController } from '@e-commerce-store/core/utilis/cookie-controller.class';
 
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
-import { environment } from 'src/environments/production.environments';
+import { CookieController } from '../../utilis/cookie-controller.class';
+import { ILoginRequest, ILoginResponse } from '../../pages/authentication/pages/login/models/interfaces/login.interface';
+import { environment } from '../../../../environments/production.environments';
 
 @Injectable({
   providedIn: 'root',

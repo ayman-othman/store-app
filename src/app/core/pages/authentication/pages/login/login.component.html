@@ -1,0 +1,75 @@
+<section class="login bg-white rounded-xl p-3 shadow">
+  <div
+    class="login-description d-flex justify-content-between flex-column align-items-center"
+  >
+    LOGO
+    <h3 class="color-gray-500">{{ "login.title" | translate }}</h3>
+    <p>{{ "login.description" | translate }}</p>
+  </div>
+  <div class="login-form p-3">
+    <form [formGroup]="loginForm" (submit)="signIn()">
+      <!-- userName -->
+      <ng-container
+        *ngTemplateOutlet="
+          loginInput;
+          context: {
+            label: 'fields.userName' | translate,
+            formGroup: loginForm,
+            formControlName: LOGIN_FROM_FIELD.userName,
+            type: 'text',
+            placeholder: 'fields.userNamePlaceholder' | translate
+          }
+        "
+      ></ng-container>
+
+      <!-- password -->
+      <ng-container
+        *ngTemplateOutlet="
+          loginInput;
+          context: {
+            label: 'fields.password' | translate,
+            formGroup: loginForm,
+            formControlName: LOGIN_FROM_FIELD.password,
+            type: 'password',
+            placeholder: 'fields.passwordPlaceholder' | translate
+          }
+        "
+      ></ng-container>
+
+      <button
+        class="w-100 rounded-xl text-center py-3"
+        [ngClass]="
+          loginForm.invalid ? 'invalid-form-button' : 'valid-form-button'
+        "
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
+        {{ "login.label" | translate }}
+      </button>
+    </form>
+  </div>
+</section>
+
+<ng-template
+  #loginInput
+  let-label="label"
+  let-formControlName="formControlName"
+  let-type="type"
+  let-placeholder="placeholder"
+  let-formGroup="formGroup"
+>
+  <div [formGroup]="formGroup" class="login-form-feild">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ label }}</mat-label>
+      <input
+        [type]="type"
+        matInput
+        [formControlName]="formControlName"
+        [placeholder]="placeholder"
+      />
+      <!-- @if (formControlName.hasError('required')) {
+      <mat-error>Email is <strong>required</strong></mat-error>
+      } -->
+    </mat-form-field>
+  </div>
+</ng-template>
