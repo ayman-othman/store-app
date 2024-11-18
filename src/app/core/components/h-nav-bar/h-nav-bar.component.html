@@ -1,0 +1,22 @@
+<header class="">
+  <div class="container d-flex justify-content-center w-100">
+    <div class="logo">
+      <strong>LOGO</strong>
+    </div>
+
+    <div class="navbar-menu">
+      @if(isUserAuthorized()){
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon> account_circle </mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onLogOut()">
+          <mat-icon>logout</mat-icon>
+          <span>{{ "logout" | translate }}</span>
+        </button>
+      </mat-menu>
+      }
+      <language-switcher></language-switcher>
+    </div>
+  </div>
+</header>
