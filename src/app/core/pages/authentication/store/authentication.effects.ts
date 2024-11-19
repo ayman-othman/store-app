@@ -28,7 +28,11 @@ export class AuthenticationEffects {
         return this._authenticationService.userSignIn(action.payload).pipe(
           switchMap((response) => {
             this._snackBar.open(
-              this._translateService.instant('login.success')
+              this._translateService.instant('login.success'),
+              '',
+              {
+                duration: 3000,
+              }
             );
             this._navigateBasedOnRole(
               this._authenticationService.getUserRole()!
@@ -55,7 +59,11 @@ export class AuthenticationEffects {
         return this._authenticationService.logOut().pipe(
           switchMap((response) => {
             this._snackBar.open(
-              this._translateService.instant('logout.success')
+              this._translateService.instant('logout.success'),
+              '',
+              {
+                duration: 3000,
+              }
             );
             this._Router.navigateByUrl('auth/login');
 
@@ -70,18 +78,17 @@ export class AuthenticationEffects {
     )
   );
 
-private _navigateBasedOnRole(role: Roles) {
-  switch (role) {
-    case ROLES.admin:
-      this._Router.navigateByUrl('/admin');
-      break;
-    case ROLES.user:
-      this._Router.navigateByUrl('/');
-      break;
-    default:
-      this._Router.navigateByUrl('/unauthorized');
-      break;
+  private _navigateBasedOnRole(role: Roles) {
+    switch (role) {
+      case ROLES.admin:
+        this._Router.navigateByUrl('/admin');
+        break;
+      case ROLES.user:
+        this._Router.navigateByUrl('/');
+        break;
+      default:
+        this._Router.navigateByUrl('/unauthorized');
+        break;
+    }
   }
-}
-
 }

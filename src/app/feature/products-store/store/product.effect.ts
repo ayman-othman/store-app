@@ -179,10 +179,14 @@ export class ProductsEffects {
     )
   );
   private _snackBarMessage(message: string) {
-    this._snackBar.open(this._translateService.instant(message));
+    this._snackBar.open(this._translateService.instant(message), '', {
+      duration: 3000,
+    });
   }
 
   private _genericError() {
-    this._snackBar.open(this._translateService.instant('error.generic'));
+    this._snackBar.open(this._translateService.instant('error.generic'), '', {
+      duration: 3000,
+    });
   }
 }
