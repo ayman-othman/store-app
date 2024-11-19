@@ -7,15 +7,31 @@ permissions:
   checks: write
   contents: read
   pull-requests: write
+
 jobs:
   build_and_preview:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout repository
       - uses: actions/checkout@v4
-      - run: ng build
+
+      # Step 3: Install Angular CLI
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
+      # Step 4: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 5: Build Angular app
+      - name: Build Angular App
+        run: ng build --configuration production
+
+      # Step 6: Deploy to Firebase Hosting (Preview)
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_UPLOAD_PHOTO_4F5DB }}
           projectId: upload-photo-4f5db
+          channelId: preview # Use preview channel for PRs
