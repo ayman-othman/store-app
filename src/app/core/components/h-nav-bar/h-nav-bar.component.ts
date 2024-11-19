@@ -19,6 +19,7 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 import { LanguageSwitcherComponent } from '../../../shared/components/language-switcher/language-switcher.component';
 import { IAppState } from '../../../store/app.store';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthenticationActions } from '@store-app/core/pages/authentication/store/authentication.actions';
 
 @Component({
   selector: 'h-nav-bar',
@@ -43,6 +44,7 @@ export class HNavBarComponent {
   );
   private _router: Router = inject(Router);
   private _destroyRef: DestroyRef = inject(DestroyRef);
+
   // Public
   public ICONS = ICONS;
   public isUserAuthorized: WritableSignal<boolean> =
@@ -52,6 +54,8 @@ export class HNavBarComponent {
   ngOnInit(): void {}
 
   public onLogOut() {
-    this._authenticationService.logOut();
+    this._store.dispatch(AuthenticationActions.lOGOUT())
   }
+
+
 }

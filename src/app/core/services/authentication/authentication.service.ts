@@ -7,8 +7,12 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
 import { CookieController } from '../../utilis/cookie-controller.class';
-import { ILoginRequest, ILoginResponse } from '../../pages/authentication/pages/login/models/interfaces/login.interface';
+import {
+  ILoginRequest,
+  ILoginResponse,
+} from '../../pages/authentication/pages/login/models/interfaces/login.interface';
 import { environment } from '../../../../environments/production.environments';
+import { Roles } from '@store-app/core/pages/authentication/pages/login/models/types/role.type';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +49,7 @@ export class AuthenticationService {
           const user = users[payload.userName];
           if (user && user.password === payload.password) {
             this._setTokenInCookie(user.token);
+            CookieController.setCookie('role', user.role);
             return { token: user.token, role: user.role };
           } else {
             throw new Error('Invalid username or password');
@@ -62,8 +67,24 @@ export class AuthenticationService {
     CookieController.setCookie('token', token);
   }
 
-  public logOut(): void {
-    CookieController.removeCookie('token');
-    this._Router.navigateByUrl('/login');
+  public getUserRole(): Roles | null {
+    return CookieController.getCookie('role') as Roles;
+  }
+
+  public logOut(): Observable<void> {
+    return new Observable<void>((observer) => {
+      try {
+        // Perform logout actions
+        CookieController.removeCookie('token');
+        CookieController.removeCookie('role');
+
+        // Notify observer of success
+        observer.next();
+        observer.complete();
+      } catch (error) {
+        // Notify observer of an error
+        observer.error(error);
+      }
+    });
   }
 }

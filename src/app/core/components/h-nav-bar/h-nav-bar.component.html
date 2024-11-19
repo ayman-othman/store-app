@@ -1,5 +1,5 @@
-<header class="">
-  <div class="container d-flex justify-content-center w-100">
+<header class="container">
+  <div class="d-flex justify-content-between">
     <div class="logo">
       <strong>LOGO</strong>
     </div>
@@ -12,7 +12,7 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="onLogOut()">
           <mat-icon>logout</mat-icon>
-          <span>{{ "logout" | translate }}</span>
+          <span>{{ "logout.label" | translate }}</span>
         </button>
       </mat-menu>
       }
