@@ -1,8 +1,23 @@
 @use '/style/colors' as colors;
-.image-container{
 
-    border: 1px solid colors.$gray-100;
-    padding: 3px;
-    margin: 3px;
+.products-dashboard{
+padding: 0 5px;
+max-width: 90vw !important;
+overflow: hidden;
 
+    .image-container{
+    
+        border: 1px solid colors.$gray-100;
+        padding: 3px;
+        margin: 3px;
+    
+    }
+    
+    
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; 
+      }
+      
+      
 }

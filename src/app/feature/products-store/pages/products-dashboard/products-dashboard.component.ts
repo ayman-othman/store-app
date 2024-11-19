@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   Component,
   inject,
@@ -44,6 +44,7 @@ import { ICONS } from '@store-app/core/models/icons/icon.const';
     MatIconModule,
     MatButtonModule,
     SvgIconComponent,
+    NgOptimizedImage
   ],
   templateUrl: './products-dashboard.component.html',
   styleUrl: './products-dashboard.component.scss',
@@ -78,7 +79,6 @@ export class ProductsDashboardComponent implements OnInit {
 
   ngAfterViewInit() {
     this._dispatchProductList();
-    this.dataSource.paginator = this.paginator;
   }
 
   public applyFilter(event: Event) {
@@ -108,6 +108,8 @@ export class ProductsDashboardComponent implements OnInit {
       .subscribe({
         next: (list) => {
           this.dataSource = new MatTableDataSource(list as IProduct[]);
+          this.dataSource.paginator = this.paginator;
+
         },
         complete: () => {},
       });
