@@ -23,7 +23,9 @@
             {{ "product.image" | translate }}
           </th>
           <td mat-cell *matCellDef="let element">
-            <img [src]="element.image" width="30" />
+            <div class="image-container  rounded-xl text-center">
+              <img [ngSrc]="element.image" width="30"  height="40"/>
+            </div>
           </td>
         </ng-container>
 
@@ -73,10 +75,10 @@
                 aria-label="delete"
                 (click)="deleteProduct({ id: element?.id, index: i })"
               >
-                <mat-icon>delete</mat-icon>
+                <mat-icon class="color-secondary-600  ">delete</mat-icon>
               </button>
               <button color="danger" mat-mini-fab aria-label="edit"   (click)="editProduct(element)">
-                <mat-icon>edit</mat-icon>
+                <mat-icon class="color-primary">edit</mat-icon>
               </button>
             </div>
           </td>
@@ -96,7 +98,7 @@
 
       <mat-paginator
         [pageSizeOptions]="[5, 10, 25, 100]"
-        aria-label="Select page of products"
+        showFirstLastButtons
       ></mat-paginator>
     </div>
   </div>

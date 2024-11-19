@@ -7,11 +7,13 @@ import { LANGUAGE } from '../../../core/models/language/language.const';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { ProjectLanguage } from '../../../core/models/language/language.type';
 import { ICONS } from '../../../core/models/icons/icon.const';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'language-switcher',
   standalone: true,
-  imports: [MatMenuModule, CommonModule, TranslateModule ,SvgIconComponent],
+  imports: [MatMenuModule, CommonModule, TranslateModule ,SvgIconComponent,MatButtonModule,MatIconModule],
 
   templateUrl: './language-switcher.component.html',
   styleUrl: './language-switcher.component.scss',
