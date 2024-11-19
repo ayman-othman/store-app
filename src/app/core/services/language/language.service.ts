@@ -30,7 +30,7 @@ export class LanguageService {
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
-      this._translateService.setDefaultLang(LANGUAGE.arabic);
+      this._translateService.setDefaultLang(LANGUAGE.english);
       const savedLanguage =
         CookieController.getCookie(COOKIES_KEYS.lang) || LANGUAGE.arabic;
       this._translateService.setDefaultLang(savedLanguage);
