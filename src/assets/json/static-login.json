@@ -4,7 +4,17 @@
     "role": "user",
     "token": "user-token"
   },
+  "User": {
+    "password": "user",
+    "role": "user",
+    "token": "user-token"
+  },
   "admin": {
+    "password": "admin",
+    "role": "admin",
+    "token": "admin-token"
+  },
+  "Admin": {
     "password": "admin",
     "role": "admin",
     "token": "admin-token"
