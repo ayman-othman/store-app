@@ -67,8 +67,8 @@ export const ProductsReducer = createReducer(
       error: error,
     };
   }),
-  // <---- CATEGORIES LIST ---->
 
+  // <---- CATEGORIES LIST ---->
   on(ProductsActions.gET_CATEGORY_LIST_SUCCESS, (state, { payload }) => {
     return {
       ...state,
@@ -80,6 +80,21 @@ export const ProductsReducer = createReducer(
     return {
       ...state,
       categories: [],
+      error: error,
+    };
+  }),
+
+  // <---- ADD PRODUCT ---->
+  on(ProductsActions.aDD_PRODUCT_SUCCESS, (state, { payload }) => {
+    return {
+      ...state,
+      list: [payload as IProduct, ...(state.list || [])],
+      error: null,
+    };
+  }),
+  on(ProductsActions.aDD_PRODUCT_FAIL, (state, { error }) => {
+    return {
+      ...state,
       error: error,
     };
   })

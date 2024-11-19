@@ -23,7 +23,7 @@ export class ProductsEffects {
     this._actions$.pipe(
       ofType(ProductsActions.gET_PRODUCT_LIST),
       switchMap((action) => {
-        return this._productsService.getProducts(action.payload.perPage).pipe(
+        return this._productsService.getProducts().pipe(
           switchMap((response) =>
             of(ProductsActions.gET_PRODUCT_LIST_SUCCESS({ payload: response }))
           ),
@@ -56,6 +56,7 @@ export class ProductsEffects {
     )
   );
 
+  // Get Product Details
   getProductDetails$ = createEffect(() =>
     this._actions$.pipe(
       ofType(ProductsActions.gET_PRODUCT),
@@ -107,6 +108,21 @@ export class ProductsEffects {
           catchError((error) =>
             of(ProductsActions.gET_CATEGORY_LIST_FAIL({ error }))
           )
+        );
+      })
+    )
+  );
+
+  // Add Product
+  addProduct$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(ProductsActions.aDD_PRODUCT),
+      switchMap((action) => {
+        return this._productsService.addProduct(action.payload).pipe(
+          switchMap((response) =>
+            of(ProductsActions.aDD_PRODUCT_SUCCESS({ payload: response }))
+          ),
+          catchError((error) => of(ProductsActions.aDD_PRODUCT_FAIL({ error })))
         );
       })
     )

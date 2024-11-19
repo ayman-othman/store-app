@@ -22,6 +22,13 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { Store } from '@ngrx/store';
+import { IAppState } from '@store-app/store/app.store';
+import { CategoriesSelector } from '../../store/product.selector';
+import { tap } from 'rxjs/internal/operators/tap';
+import { shareReplay } from 'rxjs/internal/operators/shareReplay';
+import { ProductsActions } from '../../store/product.action';
+import { CategoriesPipe } from '../../pages/products-list/pipes/categories.pipe';
 @Component({
   selector: 'app-product-fields',
   standalone: true,
@@ -37,6 +44,7 @@ import { MatInputModule } from '@angular/material/input';
     TranslateModule,
     MatSelectModule,
     MatIconModule,
+    CategoriesPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -45,6 +53,14 @@ export class ProductFieldsComponent {
   private readonly _dialog = inject(MatDialog);
   private _productDialogRef = inject(MatDialogRef<ProductFieldsComponent>);
   private _fb: FormBuilder = inject(FormBuilder);
+  private _store: Store<IAppState> = inject(Store);
+  // Observables
+  public CategoriesList$ = this._store.select(CategoriesSelector).pipe(
+    tap((t) => {
+      !t.length && this._dispatchProductCategories();
+    }),
+    shareReplay(1)
+  );
   // Forms
   public productForm = this._fb.group({
     [PRODUCT_FIELD.title]: ['', [Validators.required]],
@@ -69,6 +85,10 @@ export class ProductFieldsComponent {
     this.dialogAction.set(data.action);
   }
 
+  public _dispatchProductCategories(): void {
+    this._store.dispatch(ProductsActions.gET_CATEGORY_LIST());
+  }
+  
   onSave() {
     this._productDialogRef.close({
       action: this.dialogAction(),
@@ -96,6 +116,4 @@ export class ProductFieldsComponent {
       reader.readAsDataURL(file);
     }
   }
-
-  public applyAction(action: CrudActions) {}
 }

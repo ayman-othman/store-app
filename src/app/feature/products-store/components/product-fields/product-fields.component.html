@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>
-  {{ dialogAction() + " " + ("product.label" | translate )}}
+  {{ dialogAction() + " " + ("product.label" | translate) }}
 </h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="productForm" class="row gap-2">
@@ -77,8 +77,9 @@
     >
       <mat-label>{{ "product.category" | translate }}</mat-label>
       <mat-select [formControlName]="PRODUCT_FIELD.category">
-        <mat-option value="one">First option</mat-option>
-        <mat-option value="two">Second option</mat-option>
+        @for (category of (CategoriesList$ | async)!|categories; track $index) {
+        <mat-option [value]="category.value">{{ category.label }}</mat-option>
+        }
       </mat-select>
     </mat-form-field>
 
@@ -118,7 +119,7 @@
     mat-button
     [mat-dialog-close]="true"
     cdkFocusInitial
-    (click)="applyAction(dialogAction()!)"
+    (click)="onSave()"
   >
     {{ dialogAction() }}
   </button>
