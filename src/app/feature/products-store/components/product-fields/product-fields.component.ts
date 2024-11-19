@@ -29,6 +29,7 @@ import { tap } from 'rxjs/internal/operators/tap';
 import { shareReplay } from 'rxjs/internal/operators/shareReplay';
 import { ProductsActions } from '../../store/product.action';
 import { CategoriesPipe } from '../../pages/products-list/pipes/categories.pipe';
+import { FirebaseService } from '@store-app/core/services/firebase/firebase.service';
 @Component({
   selector: 'app-product-fields',
   standalone: true,
@@ -44,7 +45,7 @@ import { CategoriesPipe } from '../../pages/products-list/pipes/categories.pipe'
     TranslateModule,
     MatSelectModule,
     MatIconModule,
-    CategoriesPipe
+    CategoriesPipe,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -53,6 +54,7 @@ export class ProductFieldsComponent {
   private readonly _dialog = inject(MatDialog);
   private _productDialogRef = inject(MatDialogRef<ProductFieldsComponent>);
   private _fb: FormBuilder = inject(FormBuilder);
+  private _firebaseService: FirebaseService = inject(FirebaseService);
   private _store: Store<IAppState> = inject(Store);
   // Observables
   public CategoriesList$ = this._store.select(CategoriesSelector).pipe(
@@ -75,7 +77,6 @@ export class ProductFieldsComponent {
   // Signals
   public dialogAction: WritableSignal<CrudActions | null> =
     signal<CrudActions | null>(null);
-  public productImagePath: WritableSignal<string | null> = signal(null);
   // Public
   public PRODUCT_FIELD = PRODUCT_FIELD;
   constructor(
@@ -88,7 +89,7 @@ export class ProductFieldsComponent {
   public _dispatchProductCategories(): void {
     this._store.dispatch(ProductsActions.gET_CATEGORY_LIST());
   }
-  
+
   onSave() {
     this._productDialogRef.close({
       action: this.dialogAction(),
@@ -105,15 +106,9 @@ export class ProductFieldsComponent {
       event.target as HTMLInputElement | null;
     if (eventTarget?.files?.[0]) {
       const file: File = eventTarget.files[0];
-      const reader = new FileReader();
-
-      reader.addEventListener('load', () => {
-        this.productImagePath.set(reader.result! as unknown as string);
-        this.productForm
-          .get(PRODUCT_FIELD.image)
-          ?.setValue(this.productImagePath()!);
+      this._firebaseService.uploadImage(file).then((url) => {
+        this.productForm.get(PRODUCT_FIELD.image)?.setValue(url);
       });
-      reader.readAsDataURL(file);
     }
   }
 }

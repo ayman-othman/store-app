@@ -88,8 +88,13 @@
       class="field col-small-12 col-medium-5"
       appearance="outline"
     >
-      <mat-label>{{ "product.title" | translate }}</mat-label>
-      <input [formControlName]="PRODUCT_FIELD.rating" matInput type="text" />
+      <mat-label>{{ "product.rating" | translate }}</mat-label>
+      <input
+        [formControlName]="PRODUCT_FIELD.rating"
+        matInput
+        type="number"
+        max="5"
+      />
     </mat-form-field>
 
     <!-- count  -->
@@ -116,6 +121,7 @@
 <mat-dialog-actions align="end">
   <button color="danger" mat-button mat-dialog-close>Cancel</button>
   <button
+    [disabled]="productForm.invalid"
     mat-button
     [mat-dialog-close]="true"
     cdkFocusInitial
