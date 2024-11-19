@@ -1,0 +1,7 @@
+<section
+  class="unauthorized bg-white p-6 shadow-lg rounded-xl d-flex flex-column gap-3 align-items-center justify-content-center text-center"
+>
+  <svg-icon [icon]="ICONS.damaged"></svg-icon>
+  <strong [innerHTML]="'pageNotFound' | translate "></strong>
+  <button  class="w-100 bg-secondary color-white rounded-xl text-center py-3" (click)="backToHome()">{{ "backToHome" | translate }}</button>
+</section>

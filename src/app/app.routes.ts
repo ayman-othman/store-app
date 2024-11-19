@@ -24,5 +24,12 @@ export const routes: Routes = [
       import('./core/pages/authentication/authentication.routes').then(
         (r) => r.AuthenticationRoutes
       ),
-  }
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./core/pages/not-found/not-found.component').then(
+        (r) => r.NotFoundComponent
+      ),
+  },
 ];
