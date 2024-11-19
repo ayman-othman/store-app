@@ -57,10 +57,12 @@ export class ProductsService {
     }
   }
 
-  public updateProduct(product: IProduct): Observable<IAddProduct> {
-    return this._httpClient.put<IAddProduct>(
-      environment.fakeStoreApi + `/products/${product.id}`,
-      product
-    );
+  public updateProduct(product: IProduct): Observable<IProduct> {
+    return this._httpClient
+      .put<IAddProduct>(
+        environment.fakeStoreApi + `/products/${product.id}`,
+        product
+      )
+      .pipe(map(() => product));
   }
 }

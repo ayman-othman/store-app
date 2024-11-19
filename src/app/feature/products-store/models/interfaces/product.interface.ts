@@ -7,6 +7,7 @@ export interface IProduct {
   image: string;
   rating: IProductRating;
   quantity?: number;
+  index?: number;
 }
 
 export interface IAddProduct {
@@ -16,6 +17,7 @@ export interface IAddProduct {
   category: string;
   image: string;
   rating?: IProductRating;
+  index?: number;
 }
 
 export interface IProductRating {

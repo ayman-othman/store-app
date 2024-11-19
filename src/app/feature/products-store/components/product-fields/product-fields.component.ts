@@ -84,6 +84,21 @@ export class ProductFieldsComponent {
     public data: { action: CrudActions; product: IProduct }
   ) {
     this.dialogAction.set(data.action);
+    data?.product && this._setFormFields(data?.product);
+  }
+
+  private _setFormFields(product: IProduct) {
+    console.log('_setFormFields');
+
+    this.productForm.setValue({
+      [PRODUCT_FIELD.title]: product.title,
+      [PRODUCT_FIELD.price]: String(product.price),
+      [PRODUCT_FIELD.description]: product.description,
+      [PRODUCT_FIELD.category]: product.category,
+      [PRODUCT_FIELD.image]: product.image,
+      [PRODUCT_FIELD.rating]: String(product.rating.rate),
+      [PRODUCT_FIELD.count]: String(product.rating.count),
+    });
   }
 
   public _dispatchProductCategories(): void {
@@ -93,7 +108,7 @@ export class ProductFieldsComponent {
   onSave() {
     this._productDialogRef.close({
       action: this.dialogAction(),
-      product: this.productForm.value,
+      product: { ...this.productForm.value, id: this.data?.product?.id },
     });
   }
 

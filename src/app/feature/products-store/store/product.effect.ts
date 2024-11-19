@@ -128,7 +128,7 @@ export class ProductsEffects {
     )
   );
 
-  // Add Product
+  // DELETE Product
   deleteProduct$ = createEffect(() =>
     this._actions$.pipe(
       ofType(ProductsActions.dELETE_PRODUCT),
@@ -144,4 +144,21 @@ export class ProductsEffects {
       })
     )
   );
+
+    // UPDATE Product
+    updateProduct$ = createEffect(() =>
+      this._actions$.pipe(
+        ofType(ProductsActions.uPDATE_PRODUCT),
+        switchMap((action) => {
+          return this._productsService.updateProduct(action.payload).pipe(
+            switchMap((response) =>
+              of(ProductsActions.uPDATE_PRODUCT_SUCCESS({ payload: response }))
+            ),
+            catchError((error) =>
+              of(ProductsActions.uPDATE_PRODUCT_FAIL({ error }))
+            )
+          );
+        })
+      )
+    );
 }

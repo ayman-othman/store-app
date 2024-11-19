@@ -27,6 +27,8 @@ import { ProductFieldsComponent } from '../../components/product-fields/product-
 import { MatIconModule } from '@angular/material/icon';
 import { CRUD_ACTIONS, CrudActions } from '../../models/const/product.cont';
 import { MatButtonModule } from '@angular/material/button';
+import { SvgIconComponent } from '@store-app/shared/components/svg-icon/svg-icon.component';
+import { ICONS } from '@store-app/core/models/icons/icon.const';
 
 @Component({
   selector: 'app-products-dashboard',
@@ -41,6 +43,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
+    SvgIconComponent,
   ],
   templateUrl: './products-dashboard.component.html',
   styleUrl: './products-dashboard.component.scss',
@@ -66,6 +69,7 @@ export class ProductsDashboardComponent implements OnInit {
     'rating',
     'action',
   ];
+  public ICONS = ICONS;
   constructor() {}
 
   ngOnInit(): void {
@@ -110,11 +114,13 @@ export class ProductsDashboardComponent implements OnInit {
   }
 
   private _openDialog(
-    action: CrudActions
+    action: CrudActions,
+    product?: IProduct
   ): MatDialogRef<ProductFieldsComponent, any> {
     const dialogRef = this._matDialog.open(ProductFieldsComponent, {
       data: {
         action,
+        product
       },
     });
 
@@ -138,6 +144,9 @@ export class ProductsDashboardComponent implements OnInit {
       })
     );
   }
+  public deleteProduct(payload: IDeleteProduct) {
+    this._dispatchDeleteProduct(payload);
+  }
 
   private _dispatchDeleteProduct(payload: IDeleteProduct) {
     this._store.dispatch(
@@ -146,7 +155,22 @@ export class ProductsDashboardComponent implements OnInit {
       })
     );
   }
-  public deleteProduct(payload: IDeleteProduct) {
-    this._dispatchDeleteProduct(payload);
+
+  public editProduct(product: IProduct) {
+    this._openDialog(CRUD_ACTIONS.update,product)
+      .afterClosed()
+      .subscribe({
+        next: (result) => {
+          result.product && this._dispatchEditProduct(result.product);
+        },
+      });
+  }
+
+  private _dispatchEditProduct(payload: IProduct) {
+    this._store.dispatch(
+      ProductsActions.uPDATE_PRODUCT({
+        payload: payload,
+      })
+    );
   }
 }
