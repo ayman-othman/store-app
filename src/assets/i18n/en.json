@@ -50,7 +50,10 @@
   "error": {
     "generic": "Something went wrong"
   },
+  "cart": {
+    "add": "Add to cart"
+  },
   "unauthorizedNote": "Sorry, you don’t have the required permissions to access this page.</br> Please ensure you are logged in with the correct account",
   "backToHome": "Back to home",
-  "pageNotFound":"Oops! </br> The page you’re looking for doesn’t exist."
+  "pageNotFound": "Oops! </br> The page you’re looking for doesn’t exist."
 }
