@@ -118,6 +118,7 @@
 
 .container {
     margin: 0 auto;
+   
     @include breakpoints(xsmall) {
         max-width: 750px;
         padding-left: 15px;

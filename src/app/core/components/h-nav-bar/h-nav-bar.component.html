@@ -1,5 +1,4 @@
-<header >
-<div class="container">
+<header  class="container py-1">
   <div class="d-flex justify-content-between">
     <div class="logo">
       <img [ngSrc]="'projectLogo'|translate" width="30" height="30">
@@ -8,7 +7,7 @@
     <div class="navbar-menu">
       @if(isUserAuthorized()){
       <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon> account_circle </mat-icon>
+        <mat-icon class="color-primary"> account_circle </mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="onLogOut()">
@@ -20,5 +19,4 @@
       <language-switcher></language-switcher>
     </div>
   </div>
-</div>
 </header>
