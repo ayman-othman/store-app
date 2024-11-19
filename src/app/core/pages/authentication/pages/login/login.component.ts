@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, DestroyRef, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,13 +10,21 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, take } from 'rxjs';
 import { AuthenticationActions } from '../../store/authentication.actions';
 import { IAppState } from '../../../../../store/app.store';
-import {ErrorStateMatcher} from '@angular/material/core';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { Roles } from './models/types/role.type';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule, MatFormFieldModule, MatInputModule,],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgOptimizedImage
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -40,7 +48,6 @@ export class LoginComponent {
   ngOnInit(): void {
     this._listenTOLoginSuccessfully();
   }
-
 
   private _logVariableInit(): boolean {
     return true;
@@ -72,4 +79,6 @@ export class LoginComponent {
         },
       });
   }
+
+
 }

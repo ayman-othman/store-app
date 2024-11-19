@@ -1,12 +1,12 @@
-<section class="login bg-white rounded-xl p-3 shadow">
+<section class="login bg-white rounded-xl p-8 shadow">
   <div
     class="login-description d-flex justify-content-between flex-column align-items-center"
   >
-    LOGO
+    <img [ngSrc]="'projectLogo' |translate" width="70" height="70">
     <h3 class="color-gray-500">{{ "login.title" | translate }}</h3>
     <p>{{ "login.description" | translate }}</p>
   </div>
-  <div class="login-form p-3">
+  <div class="login-form my-3">
     <form [formGroup]="loginForm" (submit)="signIn()">
       <!-- userName -->
       <ng-container
@@ -59,7 +59,7 @@
   let-formGroup="formGroup"
 >
   <div [formGroup]="formGroup" class="login-form-feild">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="w-100">
       <mat-label>{{ label }}</mat-label>
       <input
         [type]="type"
