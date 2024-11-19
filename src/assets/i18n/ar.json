@@ -1,0 +1,47 @@
+{
+  "projectName": "المتجر",
+  "auth": {
+    "logout": "تسجيل الخروج"
+  },
+  "languages": {
+    "en": "انجليزي",
+    "ar": "عربي"
+  },
+  "fields": {
+    "userName": "اسم المستخدم",
+    "userNamePlaceholder": "أدخل اسم المستخدم",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "********",
+    "search": "بحث"
+  },
+  "login": {
+    "label": "تسجيل الدخول",
+    "title": "قم بتسجيل الدخول إلى حسابك",
+    "description": "مرحبًا بعودتك! يرجى إدخال بياناتك.",
+    "success": "تم تسجيل الدخول بنجاح",
+    "fail": "اسم المستخدم أو كلمة المرور غير صحيحة"
+  },
+  "categories": {
+    "all": "جميع المنتجات",
+    "electronics": "الالكترونيات",
+    "jewelery": "المجوهرات",
+    "mensclothing": "ملابس الرجال",
+    "womensclothing": "ملابس النساء"
+  },
+  "product": {
+    "label": "المنتج",
+    "title": "الأسم",
+    "price": "السعر",
+    "description": "الوصف",
+    "category": "الفئة",
+    "image": "الصورة",
+    "rating": "التقييم",
+    "add": "إنشاء منتج",
+    "deleteSuccess": "تم حذف المنتج بنجاح",
+    "addSuccess": "تم إضافة المنتج بنجاح"
+  },
+  "uploadOrDrag": "Upload or Drag and drop here",
+  "error": {
+    "generic": "حدث  خطئ ما"
+  }
+}

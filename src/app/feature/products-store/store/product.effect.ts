@@ -10,6 +10,8 @@ import { map } from 'rxjs/internal/operators/map';
 import { Store } from '@ngrx/store';
 import { IAppState } from '@store-app/store/app.store';
 import { CashedProductDetailsSelector } from './product.selector';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class ProductsEffects {
@@ -17,6 +19,8 @@ export class ProductsEffects {
   private _actions$: Actions = inject(Actions);
   private _productsService: ProductsService = inject(ProductsService);
   private _store: Store<IAppState> = inject(Store);
+  private _snackBar = inject(MatSnackBar);
+  private _translateService = inject(TranslateService);
 
   // Get Products List
   getProductsList$ = createEffect(() =>
@@ -27,9 +31,10 @@ export class ProductsEffects {
           switchMap((response) =>
             of(ProductsActions.gET_PRODUCT_LIST_SUCCESS({ payload: response }))
           ),
-          catchError((error) =>
-            of(ProductsActions.gET_PRODUCT_LIST_FAIL({ error }))
-          )
+          catchError((error) => {
+            this._genericError();
+            return of(ProductsActions.gET_PRODUCT_LIST_FAIL({ error }));
+          })
         );
       })
     )
@@ -48,9 +53,10 @@ export class ProductsEffects {
               })
             )
           ),
-          catchError((error) =>
-            of(ProductsActions.gET_PRODUCTS_BY_CATEGORY_FAIL({ error }))
-          )
+          catchError((error) => {
+            this._genericError();
+            return of(ProductsActions.gET_PRODUCTS_BY_CATEGORY_FAIL({ error }));
+          })
         );
       })
     )
@@ -119,10 +125,16 @@ export class ProductsEffects {
       ofType(ProductsActions.aDD_PRODUCT),
       switchMap((action) => {
         return this._productsService.addProduct(action.payload).pipe(
-          switchMap((response) =>
-            of(ProductsActions.aDD_PRODUCT_SUCCESS({ payload: response }))
-          ),
-          catchError((error) => of(ProductsActions.aDD_PRODUCT_FAIL({ error })))
+          switchMap((response) => {
+            this._snackBarMessage('product.addSuccess');
+            return of(
+              ProductsActions.aDD_PRODUCT_SUCCESS({ payload: response })
+            );
+          }),
+          catchError((error) => {
+            this._genericError();
+            return of(ProductsActions.aDD_PRODUCT_FAIL({ error }));
+          })
         );
       })
     )
@@ -134,31 +146,43 @@ export class ProductsEffects {
       ofType(ProductsActions.dELETE_PRODUCT),
       switchMap((action) => {
         return this._productsService.deleteProduct(action.payload).pipe(
-          switchMap((response) =>
-            of(ProductsActions.dELETE_PRODUCT_SUCCESS({ payload: response }))
-          ),
-          catchError((error) =>
-            of(ProductsActions.dELETE_PRODUCT_FAIL({ error }))
-          )
+          switchMap((response) => {
+            this._snackBarMessage('product.deleteSuccess');
+            return of(
+              ProductsActions.dELETE_PRODUCT_SUCCESS({ payload: response })
+            );
+          }),
+          catchError((error) => {
+            this._genericError();
+            return of(ProductsActions.dELETE_PRODUCT_FAIL({ error }));
+          })
         );
       })
     )
   );
 
-    // UPDATE Product
-    updateProduct$ = createEffect(() =>
-      this._actions$.pipe(
-        ofType(ProductsActions.uPDATE_PRODUCT),
-        switchMap((action) => {
-          return this._productsService.updateProduct(action.payload).pipe(
-            switchMap((response) =>
-              of(ProductsActions.uPDATE_PRODUCT_SUCCESS({ payload: response }))
-            ),
-            catchError((error) =>
-              of(ProductsActions.uPDATE_PRODUCT_FAIL({ error }))
-            )
-          );
-        })
-      )
-    );
+  // UPDATE Product
+  updateProduct$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(ProductsActions.uPDATE_PRODUCT),
+      switchMap((action) => {
+        return this._productsService.updateProduct(action.payload).pipe(
+          switchMap((response) =>
+            of(ProductsActions.uPDATE_PRODUCT_SUCCESS({ payload: response }))
+          ),
+          catchError((error) => {
+            this._genericError();
+            return of(ProductsActions.uPDATE_PRODUCT_FAIL({ error }));
+          })
+        );
+      })
+    )
+  );
+  private _snackBarMessage(message: string) {
+    this._snackBar.open(this._translateService.instant(message));
+  }
+
+  private _genericError() {
+    this._snackBar.open(this._translateService.instant('error.generic'));
+  }
 }

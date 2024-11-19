@@ -1,0 +1,47 @@
+{
+  "projectName": "Ecommerce Store",
+  "auth": {
+    "logout": "Logout"
+  },
+  "languages": {
+    "en": "en",
+    "ar": "ar"
+  },
+  "fields": {
+    "userName": "User name",
+    "userNamePlaceholder": "Enter your user name",
+    "password": "Password",
+    "passwordPlaceholder": "********",
+    "search": "Search"
+  },
+  "login": {
+    "label": "login",
+    "title": "Log in to your account",
+    "description": "Welcome back! Please enter your details.",
+    "success":"Login Success",
+    "fail": "Invalid username / Passowrd"
+  },
+  "categories": {
+    "all": "All categories",
+    "electronics": "Electronics",
+    "jewelery": "Jewelery",
+    "mensclothing": "Men's clothing",
+    "womensclothing": "Women's clothing"
+  },
+  "product": {
+    "label": "product",
+    "title": "title",
+    "price": "Price",
+    "description": "Description",
+    "category": "Category",
+    "image": "Image",
+    "rating": "Rating",
+    "add": "Create product",
+    "deleteSuccess": "Product deleted Successfully",
+    "addSuccess": "Product added Successfully"
+  },
+  "uploadOrDrag": "Upload or Drag and drop here",
+  "error": {
+    "generic": "Something went wrong"
+  }
+}
