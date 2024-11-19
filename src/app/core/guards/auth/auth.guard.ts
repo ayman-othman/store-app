@@ -5,8 +5,6 @@ import { AuthenticationService } from '@store-app/core/services/authentication/a
 export const authGuard: CanActivateFn = (route, state) => {
   const authenticationService = inject(AuthenticationService);
   const router = inject(Router);
-
-  console.log("CALLED");
   
   if (authenticationService.isUserAuthorized()) {
     return true;
