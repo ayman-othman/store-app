@@ -117,11 +117,11 @@
 }
 
 .container {
+    margin: 0 auto;
     @include breakpoints(xsmall) {
         max-width: 750px;
         padding-left: 15px;
         padding-right: 15px;
-        margin: 0 auto;
     }
 
     //---------------------
@@ -364,3 +364,28 @@
 .shadow{
     box-shadow:3px 3px 3px $gray-200;
 }
+.shadow-lg{
+    box-shadow:5px 5px 5px $gray-400;
+}
+@keyframes shimmer {
+    0% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+  }
+  
+  /* Shimmer effect class */
+  .shimmer {
+    display: inline-block;
+    background: linear-gradient(
+      90deg,
+      #f6f6f6 25%,
+      #eaeaea 50%,
+      #f6f6f6 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 5px; /* Optional: Rounds edges */
+  }

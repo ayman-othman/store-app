@@ -6,7 +6,7 @@ import {
   ViewChild,
   WritableSignal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -30,7 +30,8 @@ import { AuthenticationActions } from '@store-app/core/pages/authentication/stor
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    TranslateModule
+    TranslateModule,
+    NgOptimizedImage
   ],
   templateUrl: './h-nav-bar.component.html',
   styleUrl: './h-nav-bar.component.scss',
