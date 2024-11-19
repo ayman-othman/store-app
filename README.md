@@ -12,6 +12,7 @@ A modern e-commerce application built with **Angular** to deliver a seamless and
 ### 🌐 Progressive Web App (PWA)  
 
 ### 🎨 Custom Styling with SASS without relying on external libraries like Bootstrap or Tailwind
+### ☁️ Firebase Storage for Uploaded Photos 
 ---
 
 ## Tech Stack
@@ -22,6 +23,10 @@ A modern e-commerce application built with **Angular** to deliver a seamless and
 - **PWA**: Angular Service Worker
 
 ---
+
+## Screen shots
+![enter image description here](https://firebasestorage.googleapis.com/v0/b/upload-photo-4f5db.appspot.com/o/list.png?alt=media&token=4175488a-b05f-4bc6-b0d0-6a712715ff76)
+![enter image description here](https://firebasestorage.googleapis.com/v0/b/upload-photo-4f5db.appspot.com/o/dashboard.png?alt=media&token=7b9d333d-4392-4008-bd2c-efffe9814828)![enter image description here](https://firebasestorage.googleapis.com/v0/b/upload-photo-4f5db.appspot.com/o/not-found.png?alt=media&token=781cafa2-92c1-4bee-96ad-a35d042c1042)
 ## Project Architecture
 src
 ├── app
