@@ -1,7 +1,7 @@
 export const CRUD_ACTIONS = {
-  create: 'Create',
-  update: 'Update',
-  delete: 'Delete',
+  create: 'create',
+  update: 'update',
+  delete: 'delete',
 } as const;
 
 export const PRODUCT_FIELD = {

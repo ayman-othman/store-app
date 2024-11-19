@@ -40,3 +40,20 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+html[dir='rtl'] {
+  text-align: right;
+
+  .mat-mdc-form-field {
+    direction: rtl !important;
+
+    .mdc-floating-label {
+      right: 0;
+      left: auto;
+    }
+
+    .mdc-text-field__input {
+      text-align: right;
+    }
+  }
+}

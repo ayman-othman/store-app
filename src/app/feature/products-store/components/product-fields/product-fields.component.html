@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>
-  {{ dialogAction() + " " + ("product.label" | translate) }}
+  {{ (dialogAction()! | translate) + " " + ("product.label" | translate) }}
 </h2>
 <mat-dialog-content class="mat-typography">
   <form [formGroup]="productForm" class="row gap-2">
     <!-- Image  -->
     <mat-form-field
-      class="col-xsmall-12 col-small-12 col-medium-12"
+      class="col-xsmall-12  col-medium-12"
       appearance="fill"
     >
       <ng-container *ngIf="productForm.get(PRODUCT_FIELD.image) as imageField">
@@ -54,7 +54,7 @@
 
     <!-- Title  -->
     <mat-form-field
-      class="field col-small-12 col-medium-5"
+      class="field col-xsmall-12 col-medium-5"
       appearance="outline"
     >
       <mat-label>{{ "product.title" | translate }}</mat-label>
@@ -63,7 +63,7 @@
 
     <!-- Price  -->
     <mat-form-field
-      class="field col-small-12 col-medium-5"
+      class="field col-xsmall-12 col-medium-5"
       appearance="outline"
     >
       <mat-label>{{ "product.price" | translate }}</mat-label>
@@ -72,7 +72,7 @@
 
     <!-- category  -->
     <mat-form-field
-      class="field col-small-12 col-medium-5"
+      class="field col-xsmall-12 col-medium-5"
       appearance="outline"
     >
       <mat-label>{{ "product.category" | translate }}</mat-label>
@@ -85,7 +85,7 @@
 
     <!-- Rating  -->
     <mat-form-field
-      class="field col-small-12 col-medium-5"
+      class="field col-xsmall-12 col-medium-5"
       appearance="outline"
     >
       <mat-label>{{ "product.rating" | translate }}</mat-label>
@@ -98,7 +98,7 @@
     </mat-form-field>
 
     <mat-form-field
-      class="field col-small-12 col-medium-5"
+      class="field col-xsmall-12 col-medium-5"
       appearance="outline"
     >
       <mat-label>{{ "product.description" | translate }}</mat-label>
@@ -110,7 +110,9 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button color="danger" mat-button mat-dialog-close>Cancel</button>
+  <button color="danger" mat-button mat-dialog-close>
+    {{ "cancel" | translate }}
+  </button>
   <button
     [disabled]="productForm.invalid"
     mat-button
@@ -118,6 +120,6 @@
     cdkFocusInitial
     (click)="onSave()"
   >
-    {{ dialogAction() }}
+    {{ dialogAction()! | translate }}
   </button>
 </mat-dialog-actions>
