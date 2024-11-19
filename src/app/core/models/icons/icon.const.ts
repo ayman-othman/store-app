@@ -9,6 +9,8 @@ export const ICONS = {
   minus: 'minus',
   trash: 'trash',
   star: 'star',
+  shield: 'shield',
+  damaged: 'damaged',
 } as const;
 
 export type Icons = (typeof ICONS)[keyof typeof ICONS];
