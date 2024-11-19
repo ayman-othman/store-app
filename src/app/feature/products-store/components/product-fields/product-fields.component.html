@@ -1,0 +1,125 @@
+<h2 mat-dialog-title>
+  {{ dialogAction() + " " + ("product.label" | translate )}}
+</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="productForm" class="row gap-2">
+    <!-- Image  -->
+    <mat-form-field
+      class="col-xsmall-12 col-small-12 col-medium-12"
+      appearance="fill"
+    >
+      <ng-container *ngIf="productForm.get(PRODUCT_FIELD.image) as imageField">
+        <div
+          class="product-image-container rounded-xl p-2 d-flex flex-column justify-content-center text-center"
+          [ngStyle]="{
+            'margin-top': imageField.value ? '5px' : '20px'
+          }"
+        >
+          <!-- no image -->
+          @if(imageField.value){
+          <img class="rounded-xl" [src]="imageField!.value" />
+          <button
+            class="deleteButton"
+            mat-icon-button
+            (click)="imageField.setValue(null)"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          } @else {
+          <div
+            class="d-flex flex-column align-items-center justify-content-center"
+          >
+            <mat-icon style="opacity: 60%">file_upload</mat-icon>
+
+            <small class="m-3">{{ "uploadOrDrag" | translate }}</small>
+          </div>
+          <input
+            #fileInput
+            class="fileInput"
+            type="file"
+            multiple="multiple"
+            accept="image/*"
+            (change)="setFileData($event)"
+          />
+          }
+        </div>
+      </ng-container>
+      <input
+        matInput
+        [formControlName]="PRODUCT_FIELD.image"
+        readonly
+        [hidden]="true"
+      />
+    </mat-form-field>
+
+    <!-- Title  -->
+    <mat-form-field
+      class="field col-small-12 col-medium-5"
+      appearance="outline"
+    >
+      <mat-label>{{ "product.title" | translate }}</mat-label>
+      <input [formControlName]="PRODUCT_FIELD.title" matInput type="text" />
+    </mat-form-field>
+
+    <!-- Price  -->
+    <mat-form-field
+      class="field col-small-12 col-medium-5"
+      appearance="outline"
+    >
+      <mat-label>{{ "product.price" | translate }}</mat-label>
+      <input [formControlName]="PRODUCT_FIELD.price" matInput type="number" />
+    </mat-form-field>
+
+    <!-- category  -->
+    <mat-form-field
+      class="field col-small-12 col-medium-5"
+      appearance="outline"
+    >
+      <mat-label>{{ "product.category" | translate }}</mat-label>
+      <mat-select [formControlName]="PRODUCT_FIELD.category">
+        <mat-option value="one">First option</mat-option>
+        <mat-option value="two">Second option</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Rating  -->
+    <mat-form-field
+      class="field col-small-12 col-medium-5"
+      appearance="outline"
+    >
+      <mat-label>{{ "product.title" | translate }}</mat-label>
+      <input [formControlName]="PRODUCT_FIELD.rating" matInput type="text" />
+    </mat-form-field>
+
+    <!-- count  -->
+    <mat-form-field
+      class="field col-small-12 col-medium-5"
+      appearance="outline"
+    >
+      <mat-label>{{ "product.count" | translate }}</mat-label>
+      <input [formControlName]="PRODUCT_FIELD.count" matInput type="number" />
+    </mat-form-field>
+
+    <mat-form-field
+      class="field col-small-12 col-medium-5"
+      appearance="outline"
+    >
+      <mat-label>{{ "product.description" | translate }}</mat-label>
+      <textarea
+        [formControlName]="PRODUCT_FIELD.description"
+        matInput
+      ></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button color="danger" mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="applyAction(dialogAction()!)"
+  >
+    {{ dialogAction() }}
+  </button>
+</mat-dialog-actions>
