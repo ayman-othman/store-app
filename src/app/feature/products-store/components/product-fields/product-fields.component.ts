@@ -71,7 +71,6 @@ export class ProductFieldsComponent {
     [PRODUCT_FIELD.category]: ['', [Validators.required]],
     [PRODUCT_FIELD.image]: ['', [Validators.required]],
     [PRODUCT_FIELD.rating]: ['', [Validators.required]],
-    [PRODUCT_FIELD.count]: ['', [Validators.required]],
   });
 
   // Signals
@@ -88,7 +87,6 @@ export class ProductFieldsComponent {
   }
 
   private _setFormFields(product: IProduct) {
-    console.log('_setFormFields');
 
     this.productForm.setValue({
       [PRODUCT_FIELD.title]: product.title,
@@ -96,8 +94,7 @@ export class ProductFieldsComponent {
       [PRODUCT_FIELD.description]: product.description,
       [PRODUCT_FIELD.category]: product.category,
       [PRODUCT_FIELD.image]: product.image,
-      [PRODUCT_FIELD.rating]: String(product.rating.rate),
-      [PRODUCT_FIELD.count]: String(product.rating.count),
+      [PRODUCT_FIELD.rating]: String(product.rating.rate)
     });
   }
 
