@@ -20,6 +20,8 @@ import { LanguageSwitcherComponent } from '../../../shared/components/language-s
 import { IAppState } from '../../../store/app.store';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthenticationActions } from '@store-app/core/pages/authentication/store/authentication.actions';
+import { Roles } from '@store-app/core/pages/authentication/pages/login/models/types/role.type';
+import { ROLES } from '@store-app/core/pages/authentication/pages/login/models/const/login.const';
 
 @Component({
   selector: 'h-nav-bar',
@@ -57,6 +59,20 @@ export class HNavBarComponent {
   public onLogOut() {
     this._store.dispatch(AuthenticationActions.lOGOUT())
   }
-
+  
+  public navigateToHome() {
+    this._navigateBasedOnRole(this._authenticationService.getUserRole()!);
+  }
+  
+  private _navigateBasedOnRole(role: Roles) {
+    switch (role) {
+      case ROLES.admin:
+        this._router.navigateByUrl('/admin');
+        break;
+      case ROLES.user:
+        this._router.navigateByUrl('/');
+        break;
+    }
+  }
 
 }
