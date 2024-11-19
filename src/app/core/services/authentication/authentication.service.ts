@@ -13,6 +13,7 @@ import {
 } from '../../pages/authentication/pages/login/models/interfaces/login.interface';
 import { environment } from '../../../../environments/production.environments';
 import { Roles } from '@store-app/core/pages/authentication/pages/login/models/types/role.type';
+import { COOKIES_KEYS } from '@store-app/core/models/cookie/cookie-keys.const';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class AuthenticationService {
   private _isUserAuthorized: WritableSignal<boolean> = signal<boolean>(false);
 
   public get isUserAuthorized(): WritableSignal<boolean> {
-    if (CookieController.getCookie('token')) {
+    if (CookieController.getCookie(COOKIES_KEYS.token)) {
       this.setAuthorizationState = true;
       return this._isUserAuthorized;
     }
@@ -49,7 +50,7 @@ export class AuthenticationService {
           const user = users[payload.userName];
           if (user && user.password === payload.password) {
             this._setTokenInCookie(user.token);
-            CookieController.setCookie('role', user.role);
+            CookieController.setCookie(COOKIES_KEYS.role, user.role);
             return { token: user.token, role: user.role };
           } else {
             throw new Error('Invalid username or password');
@@ -64,19 +65,19 @@ export class AuthenticationService {
   }
 
   private _setTokenInCookie(token: string): void {
-    CookieController.setCookie('token', token);
+    CookieController.setCookie(COOKIES_KEYS.token, token);
   }
 
   public getUserRole(): Roles | null {
-    return CookieController.getCookie('role') as Roles;
+    return CookieController.getCookie(COOKIES_KEYS.role) as Roles;
   }
 
   public logOut(): Observable<void> {
     return new Observable<void>((observer) => {
       try {
         // Perform logout actions
-        CookieController.removeCookie('token');
-        CookieController.removeCookie('role');
+        CookieController.removeCookie(COOKIES_KEYS.token);
+        CookieController.removeCookie(COOKIES_KEYS.role);
 
         // Notify observer of success
         observer.next();
