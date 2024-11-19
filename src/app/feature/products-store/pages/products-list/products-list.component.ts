@@ -66,14 +66,15 @@ export class ProductsListComponent implements OnInit {
   private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private _fb: FormBuilder = inject(FormBuilder);
   // Observables
-  public productList: WritableSignal<Array<IProduct> | null> = signal(null);
-
   public CategoriesList$ = this._store.select(CategoriesSelector).pipe(
     tap((t) => {
       !t.length && this._dispatchProductCategories();
     }),
     shareReplay(1)
   );
+  // Signals
+  public productList: WritableSignal<Array<IProduct> | null> = signal(null);
+  public productListShimmer: WritableSignal<boolean> = signal(false);
 
   // Forms
   public selectedCategoryForm = this._fb.control<string | null>(null);
@@ -81,7 +82,6 @@ export class ProductsListComponent implements OnInit {
     perPage: 10,
     pageNumber: 1,
   };
-  public productListShimmer: WritableSignal<boolean> = signal(false);
 
   ngOnInit(): void {
     this._dispatchProductList();
@@ -94,14 +94,7 @@ export class ProductsListComponent implements OnInit {
   public _dispatchProductList(): void {
     this.productListShimmer.set(true);
 
-    this._store.dispatch(
-      ProductsActions.gET_PRODUCT_LIST({
-        payload: {
-          perPage: this.paginationConfiguration.perPage,
-          pageNumber: this.paginationConfiguration.pageNumber,
-        },
-      })
-    );
+    this._store.dispatch(ProductsActions.gET_PRODUCT_LIST());
   }
 
   public _dispatchProductListByCategory(category: string): void {
@@ -187,7 +180,6 @@ export class ProductsListComponent implements OnInit {
       });
   }
 
-  
   private _deleteQuery(queryName: ProductsQueryParam): void {
     this._router.navigate([], {
       relativeTo: this._activatedRoute,
@@ -209,6 +201,4 @@ export class ProductsListComponent implements OnInit {
     }
     this.selectedCategoryForm.setValue(category);
   }
-
-
 }

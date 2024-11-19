@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { IAddProduct, IProduct } from '../models/interfaces/product.interface';
+import { IAddProduct, IDeleteProduct, IProduct } from '../models/interfaces/product.interface';
 import { IPagination } from '../models/interfaces/pagination.interface';
 
 export enum ProductsActionEnum {
@@ -98,7 +98,7 @@ export const ProductsActions = createActionGroup({
       error?: HttpErrorResponse;
     }>(),
 
-    // ADD PRODUCT
+    // UPDATE PRODUCT
     [ProductsActionEnum.UPDATE_PRODUCT]: props<{
       payload: IProduct;
     }>(),
@@ -111,10 +111,10 @@ export const ProductsActions = createActionGroup({
 
     // DELETE PRODUCT
     [ProductsActionEnum.DELETE_PRODUCT]: props<{
-      payload: string;
+      payload: IDeleteProduct;
     }>(),
     [ProductsActionEnum.DELETE_PRODUCT_SUCCESS]: props<{
-      payload: string;
+      payload: IDeleteProduct;
     }>(),
     [ProductsActionEnum.DELETE_PRODUCT_FAIL]: props<{
       error?: HttpErrorResponse;

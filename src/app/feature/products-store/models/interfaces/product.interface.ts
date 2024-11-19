@@ -22,3 +22,8 @@ export interface IProductRating {
   rate: number;
   count: number;
 }
+
+export interface IDeleteProduct {
+  id?: number;
+  index: number;
+}

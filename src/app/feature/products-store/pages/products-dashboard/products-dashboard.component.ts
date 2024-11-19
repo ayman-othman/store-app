@@ -14,7 +14,10 @@ import { filter } from 'rxjs/internal/operators/filter';
 import { tap } from 'rxjs/internal/operators/tap';
 import { Store } from '@ngrx/store';
 import { IAppState } from '@store-app/store/app.store';
-import { IProduct } from '../../models/interfaces/product.interface';
+import {
+  IDeleteProduct,
+  IProduct,
+} from '../../models/interfaces/product.interface';
 import { ProductsActions } from '../../store/product.action';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -134,5 +137,16 @@ export class ProductsDashboardComponent implements OnInit {
         payload: product,
       })
     );
+  }
+
+  private _dispatchDeleteProduct(payload: IDeleteProduct) {
+    this._store.dispatch(
+      ProductsActions.dELETE_PRODUCT({
+        payload: payload,
+      })
+    );
+  }
+  public deleteProduct(payload: IDeleteProduct) {
+    this._dispatchDeleteProduct(payload);
   }
 }

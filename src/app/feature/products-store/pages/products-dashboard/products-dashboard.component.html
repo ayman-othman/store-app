@@ -1,6 +1,6 @@
 <section class="products-dashboard">
   <div class="container">
-    <div class="d-flex  justify-content-between ">
+    <div class="d-flex justify-content-between">
       <mat-form-field>
         <mat-label>Filter</mat-label>
         <input
@@ -59,24 +59,31 @@
           <td mat-cell *matCellDef="let element">{{ element.rating }}</td>
         </ng-container>
 
-        <!-- rating -->
+        <!-- actions -->
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef>{{ "action" | translate }}</th>
-          <td mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let element; let i = index">
             <div class="d-flex gap-2">
-              <button mat-raised-button color="primary" aria-label="delete">
+              <button
+                mat-mini-fab
+                color="primary"
+                aria-label="delete"
+                (click)="deleteProduct({ id: element?.id, index: i })"
+              >
                 <mat-icon>delete</mat-icon>
               </button>
-              <button color="danger" mat-mini-fab aria-label="delete">
+              <button color="danger" mat-mini-fab aria-label="edit">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>
           </td>
         </ng-container>
+
+        <!-- Rows -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-        <!-- Row shown when there is no matching data. -->
+        <!-- No data row -->
         <tr class="mat-row" *matNoDataRow>
           <td class="mat-cell" colspan="4">
             No data matching the filter "{{ input.value }}"
@@ -86,7 +93,7 @@
 
       <mat-paginator
         [pageSizeOptions]="[5, 10, 25, 100]"
-        aria-label="Select page of users"
+        aria-label="Select page of products"
       ></mat-paginator>
     </div>
   </div>

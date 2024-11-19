@@ -97,5 +97,31 @@ export const ProductsReducer = createReducer(
       ...state,
       error: error,
     };
+  }),
+
+  // <---- DELETE PRODUCT ---->
+  on(ProductsActions.dELETE_PRODUCT_SUCCESS, (state, { payload }) => {
+    const { id, index } = payload;
+
+    let updatedList = state.list;
+
+    if (id) {
+      // Remove by id if id is provided
+      updatedList = (state.list || []).filter((product) => product?.id !== id);
+    } else if (index !== undefined) {
+      // Remove by index if no id is provided
+      updatedList = (state.list || []).filter((_, i) => i !== index);
+    }
+    return {
+      ...state,
+      list: [...(updatedList || [])],
+      error: null,
+    };
+  }),
+  on(ProductsActions.aDD_PRODUCT_FAIL, (state, { error }) => {
+    return {
+      ...state,
+      error: error,
+    };
   })
 );

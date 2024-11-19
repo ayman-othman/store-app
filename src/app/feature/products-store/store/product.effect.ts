@@ -127,4 +127,21 @@ export class ProductsEffects {
       })
     )
   );
+
+  // Add Product
+  deleteProduct$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(ProductsActions.dELETE_PRODUCT),
+      switchMap((action) => {
+        return this._productsService.deleteProduct(action.payload).pipe(
+          switchMap((response) =>
+            of(ProductsActions.dELETE_PRODUCT_SUCCESS({ payload: response }))
+          ),
+          catchError((error) =>
+            of(ProductsActions.dELETE_PRODUCT_FAIL({ error }))
+          )
+        );
+      })
+    )
+  );
 }
