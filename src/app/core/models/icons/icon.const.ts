@@ -11,6 +11,12 @@ export const ICONS = {
   star: 'star',
   shield: 'shield',
   damaged: 'damaged',
+  tv: 'tv',
+  audio: 'audio',
+  laptop: 'laptop',
+  appliances: 'appliances',
+  gaming: 'gaming',
+  mobile: 'mobile',
 } as const;
 
 export type Icons = (typeof ICONS)[keyof typeof ICONS];
