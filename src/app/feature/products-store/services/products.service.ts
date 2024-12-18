@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import {
   IAddProduct,
+  ICategoryResponse,
   IDeleteProduct,
   IProduct,
+  IProductListResponse,
 } from '../models/interfaces/product.interface';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '../../../../environments/production.environments';
@@ -16,9 +18,9 @@ export class ProductsService {
   // Inject
   private _httpClient: HttpClient = inject(HttpClient);
 
-  public getProducts(): Observable<Array<IProduct>> {
-    return this._httpClient.get<Array<IProduct>>(
-      environment.fakeStoreApi + `/products/`
+  public getProducts(): Observable<IProductListResponse> {
+    return this._httpClient.get<IProductListResponse>(
+      environment.fakeStoreApi + `/products`
     );
   }
 
@@ -28,9 +30,9 @@ export class ProductsService {
     );
   }
 
-  public getCategories(): Observable<Array<string>> {
-    return this._httpClient.get<Array<string>>(
-      environment.fakeStoreApi + '/products/categories'
+  public getCategories(): Observable<ICategoryResponse> {
+    return this._httpClient.get<ICategoryResponse>(
+      environment.fakeStoreApi + '/products/category'
     );
   }
 

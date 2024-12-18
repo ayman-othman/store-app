@@ -127,26 +127,26 @@ export const ProductsReducer = createReducer(
 
   // <---- UPDATE PRODUCT ---->
   on(ProductsActions.uPDATE_PRODUCT_SUCCESS, (state, { payload }) => {
-    const { id, index } = payload;
+    // const { id, index } = payload;
 
-    let updatedList = state.list;
+    // let updatedList = state.list;
 
-    if (id) {
-      // Update the product by id if provided
-      updatedList = (state.list || []).map((product) =>
-        product.id === id ? { ...product, ...payload } : product
-      );
-    } else if (index !== undefined) {
-      // Update the product by index if id is not provided
-      updatedList = (state.list || []).map((product, i) =>
-        i === index ? { ...product, ...payload } : product
-      );
-    }
+    // if (id) {
+    //   // Update the product by id if provided
+    //   updatedList = (state.list || []).map((product) =>
+    //     product.id === id ? { ...product, ...payload } : product
+    //   );
+    // } else if (index !== undefined) {
+    //   // Update the product by index if id is not provided
+    //   updatedList = (state.list || []).map((product, i) =>
+    //     i === index ? { ...product, ...payload } : product
+    //   );
+    // }
 
     return {
       ...state,
-      list: updatedList,
-      error: null,
+      // list: updatedList,
+      // error: null,
     };
   }),
   on(ProductsActions.uPDATE_PRODUCT_FAIL, (state, { error }) => {

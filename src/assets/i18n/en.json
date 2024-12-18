@@ -29,10 +29,12 @@
   },
   "categories": {
     "all": "All categories",
-    "electronics": "Electronics",
-    "jewelery": "Jewelery",
-    "mensclothing": "Men's clothing",
-    "womensclothing": "Women's clothing"
+    "tv": "tv",
+    "audio": "audio",
+    "laptop": "laptop",
+    "mobile": "mobile",
+    "gaming": "gaming",
+    "appliances": "appliances"
   },
   "product": {
     "label": "product",

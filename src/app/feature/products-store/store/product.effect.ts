@@ -29,7 +29,11 @@ export class ProductsEffects {
       switchMap((action) => {
         return this._productsService.getProducts().pipe(
           switchMap((response) =>
-            of(ProductsActions.gET_PRODUCT_LIST_SUCCESS({ payload: response }))
+            of(
+              ProductsActions.gET_PRODUCT_LIST_SUCCESS({
+                payload: response.products,
+              })
+            )
           ),
           catchError((error) => {
             this._genericError();
@@ -109,7 +113,11 @@ export class ProductsEffects {
       switchMap((action) => {
         return this._productsService.getCategories().pipe(
           switchMap((response) =>
-            of(ProductsActions.gET_CATEGORY_LIST_SUCCESS({ payload: response }))
+            of(
+              ProductsActions.gET_CATEGORY_LIST_SUCCESS({
+                payload: response.categories,
+              })
+            )
           ),
           catchError((error) =>
             of(ProductsActions.gET_CATEGORY_LIST_FAIL({ error }))

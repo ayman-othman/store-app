@@ -94,7 +94,7 @@ export class ProductFieldsComponent {
       [PRODUCT_FIELD.description]: product.description,
       [PRODUCT_FIELD.category]: product.category,
       [PRODUCT_FIELD.image]: product.image,
-      [PRODUCT_FIELD.rating]: String(product.rating.rate)
+      [PRODUCT_FIELD.rating]: String(product?.rating?.rate)
     });
   }
 

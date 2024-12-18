@@ -1,13 +1,24 @@
+import { IResponse } from '@store-app/core/models/interface/response.interface';
+
+export interface IProductListResponse extends IResponse {
+  products: Array<IProduct>;
+}
+
 export interface IProduct {
   id: number;
   title: string;
+  image: string;
   price: number;
   description: string;
+  brand: string;
+  model: string;
+  color?: string;
   category: string;
-  image: string;
-  rating: IProductRating;
+  discount?: number;
+  popular?: boolean;
+  onSale?: boolean;
+  rating?: IProductRating;
   quantity?: number;
-  index?: number;
 }
 
 export interface IAddProduct {
@@ -28,4 +39,8 @@ export interface IProductRating {
 export interface IDeleteProduct {
   id?: number;
   index: number;
+}
+
+export interface ICategoryResponse extends IResponse {
+  categories: Array<string>;
 }

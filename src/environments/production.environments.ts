@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  fakeStoreApi: 'https://fakestoreapi.com',
+  fakeStoreApi: 'https://fakestoreapi.in/api',
   staticJson: 'assets/json',
   firebaseConfig: {
     apiKey: "AIzaSyDAotRiSqvfIuMhXEQ9GsmYlmDCxsF6vcQ",

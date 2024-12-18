@@ -29,10 +29,12 @@
   },
   "categories": {
     "all": "جميع المنتجات",
-    "electronics": "الالكترونيات",
-    "jewelery": "المجوهرات",
-    "mensclothing": "ملابس الرجال",
-    "womensclothing": "ملابس النساء"
+    "tv": "التلفزيون",
+    "audio": "سماعات",
+    "laptop": "لاب توب",
+    "mobile": "موبيل",
+    "gaming": "العاب",
+    "appliances": "اجهزة"
   },
   "product": {
     "label": "المنتج",
