@@ -2,7 +2,9 @@
   <div class="container">
     <!-- Categories -->
 
-    <div class="categories-container d-flex justify-content-center gap-2 mx-3 my-3 flex-wrap">
+    <div
+      class="categories-container d-flex justify-content-center gap-2 mx-3 my-3 flex-wrap"
+    >
       @for (category of (CategoriesList$ | async)!|categories; track $index) {
       <ng-container
         *ngTemplateOutlet="
@@ -61,11 +63,11 @@
   let-value="value"
 >
   <div
-    class="category-card rounded-xl shadow bg-white color-gray-300 px-1 py-3 d-flex justify-content-center align-items-center text-center"
+    class="category-card rounded-xl  shadow-sm bg-white color-primary px-1 py-3 d-flex flex-column justify-content-center align-items-center text-center"
     [ngClass]="selectedCategoryForm?.value === value ? 'selectedCategory ' : ''"
     (click)="onSelectCategory(value)"
   >
-    <!-- <svg-icon [icon]="icon"></svg-icon> -->
-    <span>{{ label }}</span>
+    <svg-icon [icon]="value" [size]="2"></svg-icon>
+    <strong>{{ label }}</strong>
   </div>
 </ng-template>

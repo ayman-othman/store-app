@@ -42,6 +42,7 @@ import { FormBuilder } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CategoriesPipe } from './pipes/categories.pipe';
 import { IProduct } from '../../models/interfaces/product.interface';
+import { ICONS } from '@store-app/core/models/icons/icon.const';
 
 @Component({
   selector: 'products-list',
@@ -82,6 +83,8 @@ export class ProductsListComponent implements OnInit {
     perPage: 10,
     pageNumber: 1,
   };
+  // Public
+  public ICONS = ICONS;
 
   ngOnInit(): void {
     this._dispatchProductList();
