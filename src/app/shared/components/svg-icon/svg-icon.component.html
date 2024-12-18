@@ -3,6 +3,8 @@
   aria-hidden="true"
   [class]="'icon-' + icon()"
   [class]="'icon-size-' + size()"
+  [attr.fill]="fill"
+  [ngStyle]="fillStyles"
 >
   <use [attr.xlink:href]="'#' + icon()"></use>
 </svg>

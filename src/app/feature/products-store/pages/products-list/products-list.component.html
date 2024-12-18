@@ -63,11 +63,15 @@
   let-value="value"
 >
   <div
-    class="category-card rounded-xl  shadow-sm bg-white color-primary px-1 py-3 d-flex flex-column justify-content-center align-items-center text-center"
+    class="category-card rounded-xl shadow-sm bg-white color-primary px-1 py-3 d-flex flex-column justify-content-center align-items-center text-center"
     [ngClass]="selectedCategoryForm?.value === value ? 'selectedCategory ' : ''"
     (click)="onSelectCategory(value)"
   >
-    <svg-icon [icon]="value" [size]="2"></svg-icon>
+    <svg-icon
+      [icon]="value"
+      [size]="2"
+      [fill]="selectedCategoryForm?.value === value ? '#ffae6b' : ''"
+    ></svg-icon>
     <strong>{{ label }}</strong>
   </div>
 </ng-template>
