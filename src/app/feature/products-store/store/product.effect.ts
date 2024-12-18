@@ -53,7 +53,7 @@ export class ProductsEffects {
           switchMap((response) =>
             of(
               ProductsActions.gET_PRODUCTS_BY_CATEGORY_SUCCESS({
-                payload: response,
+                payload: response.products,
               })
             )
           ),

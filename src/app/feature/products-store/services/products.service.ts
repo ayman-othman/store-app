@@ -10,6 +10,7 @@ import {
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '../../../../environments/production.environments';
 import { map, of } from 'rxjs';
+import { UrlQueryBuilder } from '@store-app/shared/utilis/url-query-builder';
 
 @Injectable({
   providedIn: 'root',
@@ -36,10 +37,17 @@ export class ProductsService {
     );
   }
 
-  public getProductsByCategory(category: string): Observable<Array<IProduct>> {
-    return this._httpClient.get<Array<IProduct>>(
-      environment.fakeStoreApi + `/products/category/${category}`
+  public getProductsByCategory(
+    category: string
+  ): Observable<IProductListResponse> {
+    const urlQuery = UrlQueryBuilder.buildUrlQuery(
+      environment.fakeStoreApi,
+      '/products/category',
+      {
+        type: category,
+      }
     );
+    return this._httpClient.get<IProductListResponse>(urlQuery.toString());
   }
 
   public addProduct(product: IAddProduct): Observable<IAddProduct> {
